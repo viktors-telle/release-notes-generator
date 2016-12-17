@@ -1,1 +1,3 @@
-#:C:\Projects\GitHub\release-notes-generator\ReleaseNotesGenerator\ReleaseNotesGenerator.xproj
+#:C:\Projects\GitHub\release-notes-generator\Api\Api.xproj
+C:\Projects\GitHub\release-notes-generator\Api\Api.xproj|C:\Projects\GitHub\release-notes-generator\Dal\Dal.xproj
+C:\Projects\GitHub\release-notes-generator\Dal\Dal.xproj|C:\Projects\GitHub\release-notes-generator\Domain\Domain.xproj
