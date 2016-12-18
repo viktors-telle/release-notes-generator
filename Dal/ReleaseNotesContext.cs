@@ -14,6 +14,14 @@ namespace ReleaseNotesGenerator.Dal
 
         public DbSet<Project> Projects { get; set; }
 
+        public DbSet<Repository> Repositories { get; set; }
+
+        public DbSet<ProjectTrackingTool> ProjectTrackingTools { get; set; }
+
+        public DbSet<RepositoryType> RepositoryTypes { get; set; }
+
+        public DbSet<Branch> Branches { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.AddEntityConfigurationsFromAssembly(GetType().GetTypeInfo().Assembly);

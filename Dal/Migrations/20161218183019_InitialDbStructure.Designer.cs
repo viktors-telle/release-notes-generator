@@ -8,9 +8,10 @@ using ReleaseNotesGenerator.Dal;
 namespace ReleaseNotesGenerator.Dal.Migrations
 {
     [DbContext(typeof(ReleaseNotesContext))]
-    partial class ReleaseNotesContextModelSnapshot : ModelSnapshot
+    [Migration("20161218183019_InitialDbStructure")]
+    partial class InitialDbStructure
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
