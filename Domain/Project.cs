@@ -5,5 +5,7 @@
         public string Name { get; set; }
 
         public string ApiKey { get; set; }
+
+        public bool IsDeactivated { get; set; }
     }
 }

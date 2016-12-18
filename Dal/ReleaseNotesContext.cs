@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ReleaseNotesGenerator.Dal.Extensions;
 using ReleaseNotesGenerator.Domain;
+using System.Reflection;
 
 namespace ReleaseNotesGenerator.Dal
 {
@@ -11,5 +13,10 @@ namespace ReleaseNotesGenerator.Dal
         }
 
         public DbSet<Project> Projects { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.AddEntityConfigurationsFromAssembly(GetType().GetTypeInfo().Assembly);
+        }
     }
 }
