@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using ReleaseNotesGenerator.Core;
 using ReleaseNotesGenerator.Dal;
 
 namespace ReleaseNotesGenerator
@@ -28,6 +29,8 @@ namespace ReleaseNotesGenerator
             // Add framework services.
             services.AddMvc();
             services.AddDbContext<ReleaseNotesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ReleaseNotesGenerator")));
+
+            services.AddTransient<IProjectComponent, ProjectComponent>();
 
             services.AddOptions();
         }
