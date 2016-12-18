@@ -35,6 +35,8 @@ namespace ReleaseNotesGenerator
             services.AddTransient<IRepositoryComponent, RepositoryComponent>();
             services.AddTransient<IReleaseNotesComponent, ReleaseNotesComponent>();
 
+            RepositoryFactory<IRepository>.Register(0, () => new GitRepositoryComponent());
+
             services.AddOptions();
             services.AddAutoMapper();
         }

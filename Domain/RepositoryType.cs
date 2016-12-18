@@ -6,6 +6,8 @@ namespace ReleaseNotesGenerator.Domain
     {
         public string Name { get; set; }
 
+        public int Code { get; set; }
+
         public List<Repository> Repositories { get; set; }
     }
 }
