@@ -1,44 +1,69 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ReleaseNotesGenerator.Dal;
 using ReleaseNotesGenerator.Domain;
+using ReleaseNotesGenerator.Core;
 
 namespace ReleaseNotesGenerator.Controllers
 {
     [Route("api/[controller]")]
     public class RepositoriesController : Controller
     {
-        private readonly ReleaseNotesContext _context;
+        private readonly IRepositoryComponent _repositoryComponent;
 
-        public RepositoriesController(ReleaseNotesContext context)
+        public RepositoriesController(IRepositoryComponent projectComponent)
         {
-            _context = context;
+            _repositoryComponent = projectComponent;
         }
 
-        public async Task<Project> GetById(int id)
+        [HttpGet("{id}", Name = "GetById")]
+        public async Task<IActionResult> Get(int id)
         {
-            return await _context.Projects.FindAsync(id);
-        }
-
-        public async Task<int> Add(Project project)
-        {
-            _context.Projects.Add(project);
-            return await _context.SaveChangesAsync();
-        }
-
-        public async Task<Project> Update(int id, Project project)
-        {
-            var existingProject = await GetById(id);
-            if (existingProject == null)
+            var project = await _repositoryComponent.GetById(id);
+            if (project == null)
             {
-                return null;
+                return NotFound();
             }
 
-            existingProject.Name = project.Name;
-            existingProject.ApiKey = project.ApiKey;
-            existingProject.IsDeactivated = project.IsDeactivated;
-            await _context.SaveChangesAsync();
-            return existingProject;
+            return new ObjectResult(project);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody]Repository repository)
+        {
+            if (repository == null)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var id = await _repositoryComponent.Add(repository);
+            return CreatedAtRoute("GetById", new { id }, null);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody]Repository repository)
+        {
+            if (repository == null || id == 0)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var updatedRepository = await _repositoryComponent.Update(id, repository);
+            if (updatedRepository == null)
+            {
+                return NotFound();
+            }
+
+            return new NoContentResult();
         }
     }
 }
