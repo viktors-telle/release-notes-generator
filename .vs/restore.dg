@@ -1,4 +1,8 @@
+#:C:\Projects\GitHub\release-notes-generator\Core\Core.xproj
+C:\Projects\GitHub\release-notes-generator\Core\Core.xproj|C:\Projects\GitHub\release-notes-generator\Dal\Dal.xproj
+C:\Projects\GitHub\release-notes-generator\Dal\Dal.xproj|C:\Projects\GitHub\release-notes-generator\Domain\Domain.xproj
 #:C:\Projects\GitHub\release-notes-generator\Api\Api.xproj
-C:\Projects\GitHub\release-notes-generator\Api\Api.xproj|C:\Projects\GitHub\release-notes-generator\Dal\Dal.xproj
 C:\Projects\GitHub\release-notes-generator\Api\Api.xproj|C:\Projects\GitHub\release-notes-generator\Core\Core.xproj
+C:\Projects\GitHub\release-notes-generator\Api\Api.xproj|C:\Projects\GitHub\release-notes-generator\Dal\Dal.xproj
+C:\Projects\GitHub\release-notes-generator\Core\Core.xproj|C:\Projects\GitHub\release-notes-generator\Dal\Dal.xproj
 C:\Projects\GitHub\release-notes-generator\Dal\Dal.xproj|C:\Projects\GitHub\release-notes-generator\Domain\Domain.xproj

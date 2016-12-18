@@ -1,25 +1,69 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ReleaseNotesGenerator.Core;
+using ReleaseNotesGenerator.Domain;
+using System.Threading.Tasks;
 
 namespace ReleaseNotesGenerator.Controllers
 {
     [Route("api/[controller]")]
     public class ProjectsController : Controller
     {
-        [HttpGet("{id}")]
-        public string Get(int id)
+        private readonly IProjectComponent _projectComponent;
+
+        public ProjectsController(IProjectComponent projectComponent)
         {
-            return "value";
+            _projectComponent = projectComponent;
+        }
+
+        [HttpGet("{id}", Name = "GetById")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var project = await _projectComponent.GetById(id);
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            return new ObjectResult(project);
         }
 
         [HttpPost]
-        public void Add([FromBody]string value)
+        public async Task<IActionResult> Add([FromBody]Project project)
         {
+            if (project == null)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var id = await _projectComponent.Add(project);
+            return CreatedAtRoute("GetById", new { id }, null);
         }
 
         [HttpPut("{id}")]
-        public void Update(int id, [FromBody]string value)
+        public async Task<IActionResult> Update(int id, [FromBody]Project project)
         {
-        }
+            if (project == null || id == 0)
+            {
+                return BadRequest();
+            }
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var updatedProject = await _projectComponent.Update(id, project);
+            if (updatedProject == null)
+            {
+                return NotFound();
+            }
+
+            return new NoContentResult();
+        }
     }
 }
