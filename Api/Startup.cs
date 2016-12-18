@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using ReleaseNotesGenerator.Core;
 using ReleaseNotesGenerator.Dal;
+using AutoMapper;
 
 namespace ReleaseNotesGenerator
 {
@@ -32,9 +33,10 @@ namespace ReleaseNotesGenerator
 
             services.AddTransient<IProjectComponent, ProjectComponent>();
             services.AddTransient<IRepositoryComponent, RepositoryComponent>();
-            services.AddTransient<IRepositoryComponent, RepositoryComponent>();
+            services.AddTransient<IReleaseNotesComponent, ReleaseNotesComponent>();
 
             services.AddOptions();
+            services.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

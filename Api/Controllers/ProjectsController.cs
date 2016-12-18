@@ -15,7 +15,7 @@ namespace ReleaseNotesGenerator.Controllers
             _projectComponent = projectComponent;
         }
 
-        [HttpGet("{id}", Name = "GetById")]
+        [HttpGet("{id}", Name = "GetProjectById")]
         public async Task<IActionResult> Get(int id)
         {
             var project = await _projectComponent.GetById(id);
@@ -41,7 +41,7 @@ namespace ReleaseNotesGenerator.Controllers
             }
 
             var id = await _projectComponent.Add(project);
-            return CreatedAtRoute("GetById", new { id }, null);
+            return CreatedAtRoute("GetProjectById", new { id }, null);
         }
 
         [HttpPut("{id}")]

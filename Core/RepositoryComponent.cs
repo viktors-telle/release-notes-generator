@@ -1,4 +1,5 @@
-﻿using ReleaseNotesGenerator.Dal;
+﻿using AutoMapper;
+using ReleaseNotesGenerator.Dal;
 using ReleaseNotesGenerator.Domain;
 using System.Threading.Tasks;
 
@@ -7,10 +8,12 @@ namespace ReleaseNotesGenerator.Core
     public class RepositoryComponent : IRepositoryComponent
     {
         private readonly ReleaseNotesContext _context;
+        private readonly IMapper _mapper;
 
-        public RepositoryComponent(ReleaseNotesContext context)
+        public RepositoryComponent(ReleaseNotesContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task<Repository> GetById(int id)
@@ -32,13 +35,7 @@ namespace ReleaseNotesGenerator.Core
                 return null;
             }
 
-            existingRepository.Name = repository.Name;
-            existingRepository.UserName = repository.UserName;
-            existingRepository.Password = repository.Password;
-            existingRepository.Url = repository.Url;
-            existingRepository.ProjectId = repository.ProjectId;
-            existingRepository.ProjectTrackingToolId = repository.ProjectTrackingToolId;
-            existingRepository.RepositoryTypeId = repository.RepositoryTypeId;            
+            _mapper.Map(repository, existingRepository);      
 
             await _context.SaveChangesAsync();
             return existingRepository;

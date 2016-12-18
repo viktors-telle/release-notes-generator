@@ -21,7 +21,9 @@
     "Microsoft.EntityFrameworkCore.Tools": "1.1.0-preview4-final",
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.1.0-preview4-final",
     "Core": "1.0.0-*",
-    "Common": "1.0.0-*"
+    "Common": "1.0.0-*",
+    "AutoMapper": "5.2.0",
+    "AutoMapper.Extensions.Microsoft.DependencyInjection": "1.1.2"
   },
 
   "tools": {  },

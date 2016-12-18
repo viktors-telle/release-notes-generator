@@ -1,4 +1,5 @@
-﻿using ReleaseNotesGenerator.Dal;
+﻿using AutoMapper;
+using ReleaseNotesGenerator.Dal;
 using ReleaseNotesGenerator.Domain;
 using System.Threading.Tasks;
 
@@ -7,10 +8,12 @@ namespace ReleaseNotesGenerator.Core
     public class ProjectComponent : IProjectComponent
     {
         private readonly ReleaseNotesContext _context;
+        private readonly IMapper _mapper;
 
-        public ProjectComponent(ReleaseNotesContext context)
+        public ProjectComponent(ReleaseNotesContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task<Project> GetById(int id)
@@ -32,9 +35,7 @@ namespace ReleaseNotesGenerator.Core
                 return null;
             }
 
-            existingProject.Name = project.Name;
-            existingProject.ApiKey = project.ApiKey;            
-            existingProject.IsDeactivated = project.IsDeactivated;            
+            _mapper.Map(project, existingProject);
             await _context.SaveChangesAsync();
             return existingProject;
         }
