@@ -31,6 +31,8 @@ namespace ReleaseNotesGenerator
             services.AddDbContext<ReleaseNotesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ReleaseNotesGenerator")));
 
             services.AddTransient<IProjectComponent, ProjectComponent>();
+            services.AddTransient<IRepositoryComponent, RepositoryComponent>();
+            services.AddTransient<IRepositoryComponent, RepositoryComponent>();
 
             services.AddOptions();
         }
