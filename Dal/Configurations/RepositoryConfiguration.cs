@@ -11,9 +11,8 @@ namespace ReleaseNotesGenerator.Dal.Configurations
             b.ToTable("Repositories", "rng")
               .HasKey(p => p.Id);
 
-            b.Property(p => p.Name).HasMaxLength(256).IsRequired();
-            b.Property(p => p.UserName).HasMaxLength(128).IsRequired();
-            b.Property(p => p.Password).HasMaxLength(512).IsRequired();
+            b.Property(p => p.Name).HasMaxLength(256).IsRequired();            
+            b.Property(p => p.AccessToken).HasMaxLength(512).IsRequired();
             b.Property(p => p.Url).HasMaxLength(4096).IsRequired();
 
             b.HasOne(r => r.Project).WithMany(p => p.Repositories);

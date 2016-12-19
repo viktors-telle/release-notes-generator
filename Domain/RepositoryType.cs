@@ -6,7 +6,7 @@ namespace ReleaseNotesGenerator.Domain
     {
         public string Name { get; set; }
 
-        public int Code { get; set; }
+        public ReleaesNotesGenerator.Common.Enums.RepositoryType Type { get; set; }
 
         public List<Repository> Repositories { get; set; }
     }

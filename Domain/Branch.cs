@@ -8,6 +8,6 @@
 
         public int RepositoryId { get; set; }
 
-        public virtual Repository Repository { get; set; }
+        public Repository Repository { get; set; }
     }
 }

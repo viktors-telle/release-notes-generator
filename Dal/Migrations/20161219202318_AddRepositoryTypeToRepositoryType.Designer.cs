@@ -9,9 +9,10 @@ using ReleaesNotesGenerator.Common.Enums;
 namespace ReleaseNotesGenerator.Dal.Migrations
 {
     [DbContext(typeof(ReleaseNotesContext))]
-    partial class ReleaseNotesContextModelSnapshot : ModelSnapshot
+    [Migration("20161219202318_AddRepositoryTypeToRepositoryType")]
+    partial class AddRepositoryTypeToRepositoryType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -89,13 +90,13 @@ namespace ReleaseNotesGenerator.Dal.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AccessToken")
-                        .IsRequired()
-                        .HasMaxLength(512);
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(256);
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(512);
 
                     b.Property<int>("ProjectId");
 
@@ -106,6 +107,10 @@ namespace ReleaseNotesGenerator.Dal.Migrations
                     b.Property<string>("Url")
                         .IsRequired()
                         .HasMaxLength(4096);
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(128);
 
                     b.HasKey("Id");
 

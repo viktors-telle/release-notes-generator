@@ -7,6 +7,8 @@ using Microsoft.Extensions.Logging;
 using ReleaseNotesGenerator.Core;
 using ReleaseNotesGenerator.Dal;
 using AutoMapper;
+using ReleaesNotesGenerator.Common.Enums;
+using ReleaseNotesGenerator.RepositoryHandlers.Core;
 
 namespace ReleaseNotesGenerator
 {
@@ -35,7 +37,8 @@ namespace ReleaseNotesGenerator
             services.AddTransient<IRepositoryComponent, RepositoryComponent>();
             services.AddTransient<IReleaseNotesComponent, ReleaseNotesComponent>();
 
-            RepositoryFactory<IRepository>.Register(0, () => new GitRepositoryComponent());
+            RepositoryFactory<IRepositoryHandler>.Register(RepositoryType.Git, () => new GitRepositoryHandler());
+            RepositoryFactory<IRepositoryHandler>.Register(RepositoryType.Tfs, () => new TfsRepositoryHandler());
 
             services.AddOptions();
             services.AddAutoMapper();
