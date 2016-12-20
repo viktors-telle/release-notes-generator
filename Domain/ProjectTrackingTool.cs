@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ReleaesNotesGenerator.Common.Enums;
 
 namespace ReleaseNotesGenerator.Domain
 {
@@ -11,6 +12,8 @@ namespace ReleaseNotesGenerator.Domain
         public string UserName { get; set; }
 
         public string Password { get; set; }
+
+        public ProjectTrackingToolType Type { get; set; }
 
         public List<Repository> Repositories { get; set; }
     }

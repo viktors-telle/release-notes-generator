@@ -8,6 +8,7 @@ using ReleaseNotesGenerator.Core;
 using ReleaseNotesGenerator.Dal;
 using AutoMapper;
 using ReleaesNotesGenerator.Common.Enums;
+using ReleaseNotesGenerator.Core.ProjectTrackingToolHandlers;
 using ReleaseNotesGenerator.Core.RepositoryHandlers;
 
 namespace ReleaseNotesGenerator
@@ -39,6 +40,9 @@ namespace ReleaseNotesGenerator
 
             RepositoryFactory<IRepositoryHandler>.Register(RepositoryType.Git, () => new GitRepositoryHandler());
             RepositoryFactory<IRepositoryHandler>.Register(RepositoryType.Tfs, () => new TfsRepositoryHandler());
+
+            ProjectTrackingToolFactory<IProjectTrackingToolHandler>.Register(ProjectTrackingToolType.Tfs, () => new TfsHandler());
+            ProjectTrackingToolFactory<IProjectTrackingToolHandler>.Register(ProjectTrackingToolType.Jira, () => new TfsHandler());
 
             services.AddOptions();
             services.AddAutoMapper();
