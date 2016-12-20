@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -17,9 +18,14 @@ namespace ReleaseNotesGenerator.Core.RepositoryHandlers
             {
                 { "api-version", "1.0" },
                 { "branch", query.BranchName }
-            };            
+            };
 
-            var newUri = QueryHelpers.AddQueryString(new Uri(new Uri(query.Url, UriKind.Absolute), $"{query.RepositoryName}/commits").ToString(), queryParameters);
+            if (query.DateTime.HasValue)
+            {
+                queryParameters.Add("fromDate", query.DateTime.Value.ToUniversalTime().ToString(CultureInfo.InvariantCulture));
+            }
+            
+            var repositoryUrl = QueryHelpers.AddQueryString(new Uri(new Uri(query.Url, UriKind.Absolute), $"{query.RepositoryName}/commits").ToString(), queryParameters);
 
             using (var httpClient = new HttpClient())
             {
@@ -31,7 +37,7 @@ namespace ReleaseNotesGenerator.Core.RepositoryHandlers
                         System.Text.Encoding.ASCII.GetBytes(
                             string.Format("{0}:{1}", "", query.AccessToken))));
 
-                var response = await httpClient.GetAsync(newUri);
+                var response = await httpClient.GetAsync(repositoryUrl);
                 var responseContent = await response.Content.ReadAsStringAsync();
                 var commitResponse = JsonConvert.DeserializeObject<CommitResponse>(responseContent);
                 return commitResponse.Value;

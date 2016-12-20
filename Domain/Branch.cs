@@ -8,7 +8,7 @@ namespace ReleaseNotesGenerator.Domain
 
         public string LastCommitId { get; set; }
 
-        public DateTime LastCommitDateTime { get; set; }        
+        public DateTime? LastCommitDateTime { get; set; }        
 
         public int RepositoryId { get; set; }
 
