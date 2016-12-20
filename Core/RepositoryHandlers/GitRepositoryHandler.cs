@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.WebUtilities;
-using Newtonsoft.Json;
-using ReleaseNotesGenerator.Domain.Commit;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.WebUtilities;
+using Newtonsoft.Json;
+using ReleaseNotesGenerator.Domain.Commit;
 
-namespace ReleaseNotesGenerator.RepositoryHandlers.Core
+namespace ReleaseNotesGenerator.Core.RepositoryHandlers
 {
     public class GitRepositoryHandler : IRepositoryHandler
     {

@@ -8,7 +8,7 @@ using ReleaseNotesGenerator.Core;
 using ReleaseNotesGenerator.Dal;
 using AutoMapper;
 using ReleaesNotesGenerator.Common.Enums;
-using ReleaseNotesGenerator.RepositoryHandlers.Core;
+using ReleaseNotesGenerator.Core.RepositoryHandlers;
 
 namespace ReleaseNotesGenerator
 {

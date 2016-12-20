@@ -1,9 +1,9 @@
-﻿using ReleaseNotesGenerator.Domain.Commit;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ReleaseNotesGenerator.Domain.Commit;
 
-namespace ReleaseNotesGenerator.RepositoryHandlers.Core
+namespace ReleaseNotesGenerator.Core.RepositoryHandlers
 {
     public class TfsRepositoryHandler : IRepositoryHandler
     {

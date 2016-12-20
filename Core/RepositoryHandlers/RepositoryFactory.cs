@@ -1,19 +1,19 @@
-﻿using ReleaesNotesGenerator.Common.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using ReleaesNotesGenerator.Common.Enums;
 
-namespace ReleaseNotesGenerator.RepositoryHandlers.Core
+namespace ReleaseNotesGenerator.Core.RepositoryHandlers
 {
     public class RepositoryFactory<T>
     {
         private RepositoryFactory() { }
 
-        private static readonly Dictionary<RepositoryType, Func<T>> _implementations = new Dictionary<RepositoryType, Func<T>>();
+        private static readonly Dictionary<RepositoryType, Func<T>> Implementations = new Dictionary<RepositoryType, Func<T>>();
 
         public static T Create(RepositoryType repositoryType)
         {
-            Func<T> constructor = null;
-            if (_implementations.TryGetValue(repositoryType, out constructor))
+            Func<T> constructor;
+            if (Implementations.TryGetValue(repositoryType, out constructor))
             {
                 return constructor();
             }                
@@ -23,12 +23,12 @@ namespace ReleaseNotesGenerator.RepositoryHandlers.Core
 
         public static void Register(RepositoryType repositoryType, Func<T> ctor)
         {
-            if (_implementations.ContainsKey(repositoryType))
+            if (Implementations.ContainsKey(repositoryType))
             {
                 return;
             }
 
-            _implementations.Add(repositoryType, ctor);
+            Implementations.Add(repositoryType, ctor);
         }
     }
 }

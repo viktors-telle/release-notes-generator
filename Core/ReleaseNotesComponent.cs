@@ -1,9 +1,9 @@
 ﻿using ReleaseNotesGenerator.Common.Models;
 using ReleaseNotesGenerator.Dal;
 using ReleaseNotesGenerator.Domain.Commit;
-using ReleaseNotesGenerator.RepositoryHandlers.Core;
 using System.Linq;
 using System.Threading.Tasks;
+using ReleaseNotesGenerator.Core.RepositoryHandlers;
 
 namespace ReleaseNotesGenerator.Core
 {

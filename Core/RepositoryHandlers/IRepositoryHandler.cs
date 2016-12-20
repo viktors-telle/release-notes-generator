@@ -1,8 +1,8 @@
-﻿using ReleaseNotesGenerator.Domain.Commit;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using ReleaseNotesGenerator.Domain.Commit;
 
-namespace ReleaseNotesGenerator.RepositoryHandlers.Core
+namespace ReleaseNotesGenerator.Core.RepositoryHandlers
 {
     public interface IRepositoryHandler
     {
