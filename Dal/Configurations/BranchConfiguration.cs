@@ -13,6 +13,7 @@ namespace ReleaseNotesGenerator.Dal.Configurations
 
             b.Property(p => p.Name).HasMaxLength(256).IsRequired();
             b.Property(p => p.LastCommitId).HasMaxLength(512);
+            b.Property(p => p.LastCommitDateTime).IsRequired().HasColumnType("datetime2");
 
             b.HasOne(branch => branch.Repository).WithMany(r => r.Branches);
         }
