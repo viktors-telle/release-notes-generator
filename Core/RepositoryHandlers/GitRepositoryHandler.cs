@@ -22,7 +22,7 @@ namespace ReleaseNotesGenerator.Core.RepositoryHandlers
 
             if (query.DateTime.HasValue)
             {
-                queryParameters.Add("fromDate", query.DateTime.Value.ToUniversalTime().ToString(CultureInfo.InvariantCulture));
+                queryParameters.Add("fromDate", query.DateTime.Value.AddSeconds(1).ToString("yyyy-MM-ddTHH:mm:ssZ"));
             }
             
             var repositoryUrl = QueryHelpers.AddQueryString(new Uri(new Uri(query.Url, UriKind.Absolute), $"{query.RepositoryName}/commits").ToString(), queryParameters);
