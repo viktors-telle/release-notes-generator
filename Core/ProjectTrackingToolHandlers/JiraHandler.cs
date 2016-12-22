@@ -6,7 +6,7 @@ namespace ReleaseNotesGenerator.Core.ProjectTrackingToolHandlers
 {
     public class JiraHandler : IProjectTrackingToolHandler
     {
-        public Task<WorkItem> GetWorkItems(IEnumerable<string> workItemIds)
+        public Task<WorkItem> GetWorkItems(ProjectTrackingTool projectTrackingTool, IEnumerable<string> workItemIds)
         {
             throw new System.NotImplementedException();
         }

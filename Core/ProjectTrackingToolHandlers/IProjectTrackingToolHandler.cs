@@ -6,6 +6,6 @@ namespace ReleaseNotesGenerator.Core.ProjectTrackingToolHandlers
 {
     public interface IProjectTrackingToolHandler
     {
-        Task<WorkItem> GetWorkItems(IEnumerable<string> workItemIds);
+        Task<WorkItem> GetWorkItems(ProjectTrackingTool projectTrackingTool, IEnumerable<string> workItemIds);
     }
 }

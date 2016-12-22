@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ReleaesNotesGenerator.Common.Exceptions;
+using ReleaseNotesGenerator.Core.ProjectTrackingToolHandlers;
 using ReleaseNotesGenerator.Core.RepositoryHandlers;
 
 namespace ReleaseNotesGenerator.Core
@@ -39,6 +40,7 @@ namespace ReleaseNotesGenerator.Core
 
             if (!commits.Any())
             {
+                // TODO: Map exception to HTTP response code and create global filter that will handle custom exception and return proper response code.
                 throw new CommitsNotFoundException();
             }
 
@@ -49,9 +51,16 @@ namespace ReleaseNotesGenerator.Core
 
             await _context.SaveChangesAsync();
 
-            var workItems = GetWorkItemsIds(commits);
+            var workItemIds = GetWorkItemsIds(commits).ToList();
+            if (!workItemIds.Any())
+            {
+                throw new RelatedWorkItemsNotFoundException();
+            }
 
-            // TODO: Query project tracking tool for work items.
+            var projectTrackingTool = await _context.ProjectTrackingTools.FindAsync(repository.ProjectTrackingToolId);
+            var projectTrackingToolHandler = ProjectTrackingToolFactory<IProjectTrackingToolHandler>.Create(projectTrackingTool.Type);
+            var workItems = await projectTrackingToolHandler.GetWorkItems(projectTrackingTool, workItemIds);                
+            
 
             return string.Empty;
         }

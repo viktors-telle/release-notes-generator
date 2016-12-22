@@ -42,7 +42,7 @@ namespace ReleaseNotesGenerator
             RepositoryFactory<IRepositoryHandler>.Register(RepositoryType.Tfs, () => new TfsRepositoryHandler());
 
             ProjectTrackingToolFactory<IProjectTrackingToolHandler>.Register(ProjectTrackingToolType.Tfs, () => new TfsHandler());
-            ProjectTrackingToolFactory<IProjectTrackingToolHandler>.Register(ProjectTrackingToolType.Jira, () => new TfsHandler());
+            ProjectTrackingToolFactory<IProjectTrackingToolHandler>.Register(ProjectTrackingToolType.Jira, () => new JiraHandler());
 
             services.AddOptions();
             services.AddAutoMapper();
