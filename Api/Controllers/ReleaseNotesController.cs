@@ -19,7 +19,7 @@ namespace ReleaseNotesGenerator.Controllers
         public async Task<IActionResult> Get([FromQuery]ReleaseNotesRequest releaseNotesRequest)
         {
             var releasesNotes = await _releaseNotesComponent.Get(releaseNotesRequest);
-            return Ok("Sample release notes.");
+            return Ok(releasesNotes);
         }
     }
 }

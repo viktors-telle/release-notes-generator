@@ -5,13 +5,16 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.WebUtilities;
+using Newtonsoft.Json;
 using ReleaseNotesGenerator.Domain;
+using ReleaseNotesGenerator.Domain.WorkItem;
 
 namespace ReleaseNotesGenerator.Core.ProjectTrackingToolHandlers
 {
     public class TfsHandler : IProjectTrackingToolHandler
     {
-        public async Task<WorkItem> GetWorkItems(ProjectTrackingTool projectTrackingTool, IEnumerable<string> workItemIds)
+        private const string WorkItemLinkSeparator = "<br />";
+        public async Task<IList<WorkItem>> GetWorkItems(ProjectTrackingTool projectTrackingTool, IEnumerable<string> workItemIds)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -29,14 +32,29 @@ namespace ReleaseNotesGenerator.Core.ProjectTrackingToolHandlers
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
                     Convert.ToBase64String(
                         System.Text.Encoding.ASCII.GetBytes(
-                            string.Format("{0}:{1}", "", "accessToken"))));
+                            string.Format("{0}:{1}", "", projectTrackingTool.AccessToken))));
 
                 var response = await httpClient.GetAsync(repositoryUrl);
                 var responseContent = await response.Content.ReadAsStringAsync();
-                return new WorkItem();
-                //var commitResponse = JsonConvert.DeserializeObject<CommitResponse>(responseContent);
-                //return commitResponse.Value;
+                var workItemResponse = JsonConvert.DeserializeObject<WorkItemResponse>(responseContent);
+                return workItemResponse.Value;
             }
+        }
+
+        public string CreateLinksToWorkItems(ProjectTrackingTool projectTrackingTool, IEnumerable<WorkItem> workItems)
+        {
+            var links = new List<string>();
+            foreach (var workItem in workItems)
+            {
+                var workItemUrl = $@"<a href='{QueryHelpers.AddQueryString(new Uri(new Uri(projectTrackingTool.Url, UriKind.Absolute), 
+                    $"{projectTrackingTool.ProjectName}/_workitems").ToString(), 
+                    "id", 
+                    workItem.Id.ToString())}'>{workItem.Field.Title}</a>";                            
+                links.Add(workItemUrl);
+            }
+
+            var linksWithSeparator = string.Join(WorkItemLinkSeparator, links);
+            return linksWithSeparator;            
         }
     }
 }

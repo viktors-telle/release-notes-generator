@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using ReleaesNotesGenerator.Common.Exceptions;
 using ReleaseNotesGenerator.Core.ProjectTrackingToolHandlers;
 using ReleaseNotesGenerator.Core.RepositoryHandlers;
+using ReleaseNotesGenerator.Domain;
 
 namespace ReleaseNotesGenerator.Core
 {
@@ -24,11 +25,31 @@ namespace ReleaseNotesGenerator.Core
         public async Task<string> Get(ReleaseNotesRequest releaseNotes)
         {
             var repository = await _context.Repositories.FindAsync(releaseNotes.RepositoryId);
+
+            var commits = await GetCommits(repository, releaseNotes.BranchName);
+            var workItemIds = GetWorkItemsIdsFromCommits(commits).ToList();
+            if (!workItemIds.Any())
+            {
+                throw new RelatedWorkItemsNotFoundException();
+            }
+
+            var projectTrackingTool = await _context.ProjectTrackingTools.FindAsync(repository.ProjectTrackingToolId);
+            var projectTrackingToolHandler = ProjectTrackingToolFactory<IProjectTrackingToolHandler>.Create(projectTrackingTool.Type);
+            var workItems = await projectTrackingToolHandler.GetWorkItems(projectTrackingTool, workItemIds);
+
+            var linksToWorkItems = projectTrackingToolHandler.CreateLinksToWorkItems(projectTrackingTool, workItems);
+            return linksToWorkItems;
+        }
+
+        private async Task<IList<Commit>> GetCommits(Repository repository, string branchName)
+        {
             await _context.Entry(repository).Collection(r => r.Branches).LoadAsync();
             await _context.Entry(repository).Reference(r => r.RepositoryType).LoadAsync();
 
-            var branch = repository.Branches.First(b => b.Name == releaseNotes.BranchName);
+            var branch = repository.Branches.First(b => b.Name == branchName);
             var repositoryHandler = RepositoryFactory<IRepositoryHandler>.Create(repository.RepositoryType.Type);
+
+            // TODO: Create AutoMapper mapping.
             var commits = await repositoryHandler.GetCommits(new CommitQuery()
             {
                 Url = repository.Url,
@@ -51,21 +72,10 @@ namespace ReleaseNotesGenerator.Core
 
             await _context.SaveChangesAsync();
 
-            var workItemIds = GetWorkItemsIds(commits).ToList();
-            if (!workItemIds.Any())
-            {
-                throw new RelatedWorkItemsNotFoundException();
-            }
-
-            var projectTrackingTool = await _context.ProjectTrackingTools.FindAsync(repository.ProjectTrackingToolId);
-            var projectTrackingToolHandler = ProjectTrackingToolFactory<IProjectTrackingToolHandler>.Create(projectTrackingTool.Type);
-            var workItems = await projectTrackingToolHandler.GetWorkItems(projectTrackingTool, workItemIds);                
-            
-
-            return string.Empty;
+            return commits;
         }
 
-        private IEnumerable<string> GetWorkItemsIds(IEnumerable<Commit> commits)
+        private IEnumerable<string> GetWorkItemsIdsFromCommits(IEnumerable<Commit> commits)
         {
             var relatedWorkItems =
                 commits.Select(commit => _regex.Match(commit.Comment).Value)

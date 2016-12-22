@@ -9,9 +9,10 @@ using ReleaesNotesGenerator.Common.Enums;
 namespace ReleaseNotesGenerator.Dal.Migrations
 {
     [DbContext(typeof(ReleaseNotesContext))]
-    partial class ReleaseNotesContextModelSnapshot : ModelSnapshot
+    [Migration("20161222203620_AddProjectNameToProjectTrackingTools")]
+    partial class AddProjectNameToProjectTrackingTools
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")

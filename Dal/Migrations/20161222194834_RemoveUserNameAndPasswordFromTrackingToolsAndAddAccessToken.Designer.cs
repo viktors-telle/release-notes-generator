@@ -9,9 +9,10 @@ using ReleaesNotesGenerator.Common.Enums;
 namespace ReleaseNotesGenerator.Dal.Migrations
 {
     [DbContext(typeof(ReleaseNotesContext))]
-    partial class ReleaseNotesContextModelSnapshot : ModelSnapshot
+    [Migration("20161222194834_RemoveUserNameAndPasswordFromTrackingToolsAndAddAccessToken")]
+    partial class RemoveUserNameAndPasswordFromTrackingToolsAndAddAccessToken
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -73,8 +74,6 @@ namespace ReleaseNotesGenerator.Dal.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(256);
-
-                    b.Property<string>("ProjectName");
 
                     b.Property<int>("Type");
 
