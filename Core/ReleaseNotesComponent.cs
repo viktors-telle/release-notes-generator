@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ReleaseNotesGenerator.Common.Models;
 using ReleaseNotesGenerator.Dal;
 using ReleaseNotesGenerator.Domain.Commit;
@@ -24,21 +25,36 @@ namespace ReleaseNotesGenerator.Core
 
         public async Task<string> Get(ReleaseNotesRequest releaseNotes)
         {
-            var repository = await _context.Repositories.FindAsync(releaseNotes.RepositoryId);
-
-            var commits = await GetCommits(repository, releaseNotes.BranchName);
-            var workItemIds = GetWorkItemsIdsFromCommits(commits).ToList();
-            if (!workItemIds.Any())
+            using (var transaction = _context.Database.BeginTransaction())
             {
-                throw new RelatedWorkItemsNotFoundException();
+                try
+                {
+                    var repository = await _context.Repositories.FindAsync(releaseNotes.RepositoryId);
+
+                    var commits = await GetCommits(repository, releaseNotes.BranchName);
+                    var workItemIds = GetWorkItemsIdsFromCommits(commits).ToList();
+                    if (!workItemIds.Any())
+                    {
+                        throw new RelatedWorkItemsNotFoundException();
+                    }
+
+                    var projectTrackingTool = await _context.ProjectTrackingTools.FindAsync(repository.ProjectTrackingToolId);
+                    var projectTrackingToolHandler =
+                        ProjectTrackingToolFactory<IProjectTrackingToolHandler>.Create(projectTrackingTool.Type);
+                    var workItems = await projectTrackingToolHandler.GetWorkItems(projectTrackingTool, workItemIds);
+
+                    var linksToWorkItems = projectTrackingToolHandler.CreateLinksToWorkItems(projectTrackingTool, workItems);
+
+                    transaction.Commit();
+                    return linksToWorkItems;
+                }
+                catch (Exception e)
+                {
+                    // TODO: Log application to file or ApplicationInsights.
+                    Console.WriteLine(e);
+                    throw;
+                }                
             }
-
-            var projectTrackingTool = await _context.ProjectTrackingTools.FindAsync(repository.ProjectTrackingToolId);
-            var projectTrackingToolHandler = ProjectTrackingToolFactory<IProjectTrackingToolHandler>.Create(projectTrackingTool.Type);
-            var workItems = await projectTrackingToolHandler.GetWorkItems(projectTrackingTool, workItemIds);
-
-            var linksToWorkItems = projectTrackingToolHandler.CreateLinksToWorkItems(projectTrackingTool, workItems);
-            return linksToWorkItems;
         }
 
         private async Task<IList<Commit>> GetCommits(Repository repository, string branchName)
@@ -65,14 +81,18 @@ namespace ReleaseNotesGenerator.Core
                 throw new CommitsNotFoundException();
             }
 
+            await SaveLastCommit(commits, branch);
+            return commits;
+        }
+
+        private async Task SaveLastCommit(IEnumerable<Commit> commits, Branch branch)
+        {
             var lastCommit = commits.OrderByDescending(commit => commit.Committer.Date).FirstOrDefault();
 
             branch.LastCommitDateTime = lastCommit.Committer.Date;
             branch.LastCommitId = lastCommit.CommitId;
 
             await _context.SaveChangesAsync();
-
-            return commits;
         }
 
         private IEnumerable<string> GetWorkItemsIdsFromCommits(IEnumerable<Commit> commits)
