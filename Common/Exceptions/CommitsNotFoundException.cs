@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Net;
 
 namespace ReleaesNotesGenerator.Common.Exceptions
 {
-    public class CommitsNotFoundException : Exception
+    public class CommitsNotFoundException : BaseException
     {
         public CommitsNotFoundException()
         {
@@ -15,5 +16,7 @@ namespace ReleaesNotesGenerator.Common.Exceptions
         public CommitsNotFoundException(string message, Exception innerException) : base(message, innerException)
         {
         }
+
+        public override HttpStatusCode StatusCode => HttpStatusCode.BadRequest;
     }
 }

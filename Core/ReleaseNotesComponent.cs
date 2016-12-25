@@ -50,7 +50,7 @@ namespace ReleaseNotesGenerator.Core
                 }
                 catch (Exception e)
                 {
-                    // TODO: Log application to file or ApplicationInsights.
+                    // TODO: Log error to file or ApplicationInsights.
                     Console.WriteLine(e);
                     throw;
                 }                

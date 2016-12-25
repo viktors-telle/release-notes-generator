@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Net;
 
 namespace ReleaesNotesGenerator.Common.Exceptions
 {
-    public class RelatedWorkItemsNotFoundException : Exception
+    public class RelatedWorkItemsNotFoundException : BaseException
     {
         public RelatedWorkItemsNotFoundException()
         {
@@ -15,5 +16,7 @@ namespace ReleaesNotesGenerator.Common.Exceptions
         public RelatedWorkItemsNotFoundException(string message, Exception innerException) : base(message, innerException)
         {
         }
+
+        public override HttpStatusCode StatusCode => HttpStatusCode.BadRequest;
     }
 }
