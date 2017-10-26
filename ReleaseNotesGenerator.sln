@@ -1,22 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{26020658-8CCD-4D3E-91B3-54E5DD39D52F}"
 	ProjectSection(SolutionItems) = preProject
 		..\global.json = ..\global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Api", "Api\Api.xproj", "{22364F68-2478-4193-B3D8-45193319DC6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{22364F68-2478-4193-B3D8-45193319DC6F}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Dal", "Dal\Dal.xproj", "{1C58BCB5-ADB9-4A9E-B9AB-71D55A4E1124}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dal", "Dal\Dal.csproj", "{1C58BCB5-ADB9-4A9E-B9AB-71D55A4E1124}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Domain", "Domain\Domain.xproj", "{2393DEB3-D933-4F67-BF04-FAD00637BB18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{2393DEB3-D933-4F67-BF04-FAD00637BB18}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Core", "Core\Core.xproj", "{DD9639B3-DF0A-4D0A-A5C9-B1337BA2F5EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{DD9639B3-DF0A-4D0A-A5C9-B1337BA2F5EE}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Common", "Common\Common.xproj", "{55C7474E-E512-4EED-ADFF-2C4963C19CE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{55C7474E-E512-4EED-ADFF-2C4963C19CE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,5 +47,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {38E2B11E-9A95-4697-B58A-2738DF5EC389}
 	EndGlobalSection
 EndGlobal
