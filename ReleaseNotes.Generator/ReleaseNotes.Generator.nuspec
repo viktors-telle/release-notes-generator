@@ -1,0 +1,15 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>IfInsurance.ReleaseNotesGenerator</id>
+    <title>Release notes generator</title>
+    <version>1.0.0.0</version>
+    <authors>If - Waypoint</authors>
+    <owners>If</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>API to generate release notes for the project.</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>ReleaseNotes</tags>
+  </metadata>
+</package>
