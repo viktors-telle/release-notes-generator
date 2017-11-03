@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using ReleaseNotes.Generator.Dto;
 using ReleaseNotes.Generator.Exceptions;
 
-namespace ReleaseNotes.Generator.Controllers
+namespace ReleaseNotes.Generator.Api
 {
     [Route("api/[controller]")]
     public class ReleaseNotesController : Controller

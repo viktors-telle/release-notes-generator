@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ReleaseNotes.Generator.Components.Interfaces;
 using ReleaseNotes.Generator.Domain;
 
-namespace ReleaseNotes.Generator.Controllers
+namespace ReleaseNotes.Generator.Api
 {
     [Route("api/[controller]")]
     public class ProjectsController : Controller

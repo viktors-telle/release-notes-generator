@@ -48,20 +48,20 @@ namespace ReleaseNotes.Generator
             services.AddDbContext<ReleaseNotesContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("ReleaseNotesGenerator")));
 
-            services.AddTransient<IProjectComponent, ProjectComponent>();
-            services.AddTransient<IRepositoryComponent, RepositoryComponent>();
-            services.AddTransient<IBranchComponent, BranchComponent>();
-            services.AddTransient<IReleaseNotesComponent, ReleaseNotesComponent>();
-            services.AddTransient<IProjectTrackingToolComponent, ProjectTrackingToolComponent>();
-            services.AddTransient<IRepositoryItemPathComponent, RepositoryItemPathComponent>();
-            services.AddTransient<IEmailComponent, EmailComponent>();
-            services.AddTransient<TfsHandler, TfsHandler>();
-            services.AddTransient<JiraHandler, JiraHandler>();
-            services.AddTransient<GitRepositoryHandler, GitRepositoryHandler>();
-            services.AddTransient<TfsRepositoryHandler, TfsRepositoryHandler>();
-            services.AddTransient<IRepositoryAuthorizationComponent, RepositoryAuthorizationComponent>();
-            services.AddTransient<IBranchAuthorizationComponent, BranchAuthorizationComponent>();
-            services.AddTransient<IRepositoryItemPathAuthorizationComponent, RepositoryItemPathAuthorizationComponent>();
+            services.AddScoped<IProjectComponent, ProjectComponent>();
+            services.AddScoped<IRepositoryComponent, RepositoryComponent>();
+            services.AddScoped<IBranchComponent, BranchComponent>();
+            services.AddScoped<IReleaseNotesComponent, ReleaseNotesComponent>();
+            services.AddScoped<IProjectTrackingToolComponent, ProjectTrackingToolComponent>();
+            services.AddScoped<IRepositoryItemPathComponent, RepositoryItemPathComponent>();
+            services.AddScoped<IEmailComponent, EmailComponent>();
+            services.AddScoped<TfsHandler, TfsHandler>();
+            services.AddScoped<JiraHandler, JiraHandler>();
+            services.AddScoped<GitRepositoryHandler, GitRepositoryHandler>();
+            services.AddScoped<TfsRepositoryHandler, TfsRepositoryHandler>();
+            services.AddScoped<IRepositoryAuthorizationComponent, RepositoryAuthorizationComponent>();
+            services.AddScoped<IBranchAuthorizationComponent, BranchAuthorizationComponent>();
+            services.AddScoped<IRepositoryItemPathAuthorizationComponent, RepositoryItemPathAuthorizationComponent>();
 
             var serviceProvider = services.BuildServiceProvider();
             RepositoryFactory<IRepositoryHandler>.Register(RepositoryType.Git,

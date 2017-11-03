@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ReleaseNotes.Generator.Dto;
 
-namespace ReleaseNotes.Generator.Controllers
+namespace ReleaseNotes.Generator.Api
 {    
     public abstract class BaseController : Controller
     {
