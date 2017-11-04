@@ -10,7 +10,7 @@ namespace ReleaseNotesGenerator.Middleware
     public class ApiAuthenticationMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly string[] _pathsWithoutAuthentication = { "/home/error", "/api/projects", "/swagger", "/api/projecttrackingtools" };
+        private readonly string[] _pathsWithoutAuthentication = { "/home", "/api/projects", "/swagger", "/api/projecttrackingtools" };
 
         public ApiAuthenticationMiddleware(RequestDelegate next)
         {

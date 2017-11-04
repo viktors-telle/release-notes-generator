@@ -30,7 +30,7 @@ namespace ReleaseNotesGenerator.Dal
 
         public static void Migrate(IApplicationBuilder app)
         {         
-            using (var context = app.ApplicationServices.GetRequiredService<ReleaseNotesContext>())
+            using (var context = app.ApplicationServices.GetService<ReleaseNotesContext>())
             {                
                 context.Database.Migrate();              
             }
