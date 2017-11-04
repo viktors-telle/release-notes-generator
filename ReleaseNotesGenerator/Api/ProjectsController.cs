@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ReleaseNotesGenerator.Components.Interfaces;
 using ReleaseNotesGenerator.Domain;
@@ -15,6 +16,7 @@ namespace ReleaseNotesGenerator.Api
             _projectComponent = projectComponent;
         }
 
+        [Authorize(Policy = "ModifyRepository")]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {

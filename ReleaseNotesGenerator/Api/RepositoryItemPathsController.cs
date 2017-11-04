@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ReleaseNotesGenerator.Components.Interfaces;
-using ReleaseNotesGenerator.Components.Interfaces.Authorization;
 using ReleaseNotesGenerator.Domain;
 
 namespace ReleaseNotesGenerator.Api
@@ -10,13 +9,10 @@ namespace ReleaseNotesGenerator.Api
     public class RepositoryItemPathsController : BaseController
     {        
         private readonly IRepositoryItemPathComponent _repositoryItemPathComponent;
-        private readonly IRepositoryItemPathAuthorizationComponent _repositoryItemPathAuthorizationComponent;
 
-        public RepositoryItemPathsController(IRepositoryItemPathComponent repositoryItemPathComponent, 
-            IRepositoryItemPathAuthorizationComponent repositoryItemPathAuthorizationComponent)
+        public RepositoryItemPathsController(IRepositoryItemPathComponent repositoryItemPathComponent)
         {
-            _repositoryItemPathComponent = repositoryItemPathComponent;
-            _repositoryItemPathAuthorizationComponent = repositoryItemPathAuthorizationComponent;
+            _repositoryItemPathComponent = repositoryItemPathComponent;            
         }
 
         [HttpGet("{id}")]
@@ -25,12 +21,6 @@ namespace ReleaseNotesGenerator.Api
             if (id == 0)
             {
                 return BadRequest();
-            }
-
-            if (!await _repositoryItemPathAuthorizationComponent.IsAuthorizedToGetOrUpdate(
-                GetAuthorizationParameters(Request.Headers), id))
-            {
-                return Forbid();
             }
 
             var branch = await _repositoryItemPathComponent.GetById(id);
@@ -55,12 +45,6 @@ namespace ReleaseNotesGenerator.Api
                 return BadRequest(ModelState);
             }
 
-            if (!await _repositoryItemPathAuthorizationComponent.IsAuthorizedToAdd(
-                GetAuthorizationParameters(Request.Headers), repositoryItemPath.BranchId))
-            {
-                return Forbid();
-            }
-
             await _repositoryItemPathComponent.Add(repositoryItemPath);
             return new ObjectResult(repositoryItemPath);
         }
@@ -76,12 +60,6 @@ namespace ReleaseNotesGenerator.Api
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-
-            if (!await _repositoryItemPathAuthorizationComponent.IsAuthorizedToGetOrUpdate(
-                GetAuthorizationParameters(Request.Headers), repositoryItemPath.Id))
-            {
-                return Forbid();
             }
 
             var updatedBranch = await _repositoryItemPathComponent.Update(id, repositoryItemPath);

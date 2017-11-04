@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ReleaseNotesGenerator.Components.Interfaces;
-using ReleaseNotesGenerator.Components.Interfaces.Authorization;
 using ReleaseNotesGenerator.Domain;
 
 namespace ReleaseNotesGenerator.Api
@@ -10,26 +9,18 @@ namespace ReleaseNotesGenerator.Api
     public class RepositoriesController : BaseController
     {        
         private readonly IRepositoryComponent _repositoryComponent;
-        private readonly IRepositoryAuthorizationComponent _repositoryAuthorizationComponent;
 
-        public RepositoriesController(IRepositoryComponent projectComponent, IRepositoryAuthorizationComponent repositoryAuthorizationComponent)
+        public RepositoriesController(IRepositoryComponent projectComponent)
         {
             _repositoryComponent = projectComponent;
-            _repositoryAuthorizationComponent = repositoryAuthorizationComponent;
         }
-
+       
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             if (id == 0)
             {
                 return BadRequest();
-            }
-
-            if (! await  _repositoryAuthorizationComponent.IsAuthorizedToGetOrUpdate(
-                GetAuthorizationParameters(Request.Headers), id))
-            {
-                return Unauthorized();
             }
 
             var project = await _repositoryComponent.GetById(id);
@@ -52,13 +43,7 @@ namespace ReleaseNotesGenerator.Api
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-
-            if (!await _repositoryAuthorizationComponent.IsAuthorizedToAdd(
-                GetAuthorizationParameters(Request.Headers), repository.ProjectId))
-            {
-                return Unauthorized();
-            }        
+            }   
 
             await _repositoryComponent.Add(repository);
             return new ObjectResult(repository);
@@ -75,12 +60,6 @@ namespace ReleaseNotesGenerator.Api
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-
-            if (!await _repositoryAuthorizationComponent.IsAuthorizedToGetOrUpdate(
-                GetAuthorizationParameters(Request.Headers), id))
-            {
-                return Unauthorized();
             }
 
             var updatedRepository = await _repositoryComponent.Update(id, repository);

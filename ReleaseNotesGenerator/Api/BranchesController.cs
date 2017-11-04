@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ReleaseNotesGenerator.Components.Interfaces;
-using ReleaseNotesGenerator.Components.Interfaces.Authorization;
 using ReleaseNotesGenerator.Domain;
 
 namespace ReleaseNotesGenerator.Api
@@ -10,12 +9,10 @@ namespace ReleaseNotesGenerator.Api
     public class BranchesController : BaseController
     {        
         private readonly IBranchComponent _branchComponent;
-        private readonly IBranchAuthorizationComponent _branchAuthorizationComponent;
 
-        public BranchesController(IBranchComponent branchComponent, IBranchAuthorizationComponent branchAuthorizationComponent)
+        public BranchesController(IBranchComponent branchComponent)
         {
             _branchComponent = branchComponent;
-            _branchAuthorizationComponent = branchAuthorizationComponent;
         }
 
         [HttpGet("{id}")]
@@ -24,12 +21,6 @@ namespace ReleaseNotesGenerator.Api
             if (id == 0)
             {
                 return BadRequest();
-            }
-
-            if (!await _branchAuthorizationComponent.IsAuthorizedToGet(
-               GetAuthorizationParameters(Request.Headers), id))
-            {
-                return Unauthorized();
             }
 
             var branch = await _branchComponent.GetById(id);
@@ -54,12 +45,6 @@ namespace ReleaseNotesGenerator.Api
                 return BadRequest(ModelState);
             }
 
-            if (!await _branchAuthorizationComponent.IsAuthorizedToAdd(
-                GetAuthorizationParameters(Request.Headers), branch.RepositoryId))
-            {
-                return Unauthorized();
-            }
-
             await _branchComponent.Add(branch);
             return new ObjectResult(branch);
         }
@@ -75,12 +60,6 @@ namespace ReleaseNotesGenerator.Api
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-
-            if (!await _branchAuthorizationComponent.IsAuthorizedToUpdate(
-                GetAuthorizationParameters(Request.Headers), branch.RepositoryId, id))
-            {
-                return Unauthorized();
             }
 
             var updatedBranch = await _branchComponent.Update(id, branch);

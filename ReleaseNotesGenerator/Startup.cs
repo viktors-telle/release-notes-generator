@@ -10,9 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using ReleaseNotesGenerator.Components.Implementations;
-using ReleaseNotesGenerator.Components.Implementations.Authorization;
 using ReleaseNotesGenerator.Components.Interfaces;
-using ReleaseNotesGenerator.Components.Interfaces.Authorization;
 using ReleaseNotesGenerator.Dal;
 using ReleaseNotesGenerator.Dto.Options;
 using ReleaseNotesGenerator.Enums;
@@ -37,6 +35,14 @@ namespace ReleaseNotesGenerator
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("ModifyRepository",
+            //                      policy => policy.Requirements.Add(new RepositoryModificationRequirement()));
+            //});
+
+
             services.AddDbContext<ReleaseNotesContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("ReleaseNotesGenerator")));
 
@@ -51,9 +57,6 @@ namespace ReleaseNotesGenerator
             services.AddScoped<JiraHandler, JiraHandler>();
             services.AddScoped<GitRepositoryHandler, GitRepositoryHandler>();
             services.AddScoped<TfsRepositoryHandler, TfsRepositoryHandler>();
-            services.AddScoped<IRepositoryAuthorizationComponent, RepositoryAuthorizationComponent>();
-            services.AddScoped<IBranchAuthorizationComponent, BranchAuthorizationComponent>();
-            services.AddScoped<IRepositoryItemPathAuthorizationComponent, RepositoryItemPathAuthorizationComponent>();
 
             var serviceProvider = services.BuildServiceProvider();
             RepositoryFactory<IRepositoryHandler>.Register(RepositoryType.Git,
@@ -94,7 +97,7 @@ namespace ReleaseNotesGenerator
             }
 
             app.UseStaticFiles();
-            app.UseMiddleware<ApiAuthenticationMiddleware>();
+            //app.UseMiddleware<ApiAuthenticationMiddleware>();
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseStatusCodePages();
