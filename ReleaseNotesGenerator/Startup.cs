@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -19,6 +20,7 @@ using Serilog;
 using Serilog.Enrichers;
 using Serilog.Formatting.Json;
 using Serilog.Sinks.RollingFile;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace ReleaseNotesGenerator
 {
@@ -73,7 +75,18 @@ namespace ReleaseNotesGenerator
 
             services.AddOptions();
             services.AddAutoMapper();
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "Release Notes Generator API",
+                    Description = "Release Notes Generator API Swagger Documentation",
+                    TermsOfService = "None",
+                    Contact = new Contact { Name = "Viktors Telle", Url = "https://github.com/viktors-telle" },
+                    License = new License { Name = "MIT", Url = "https://en.wikipedia.org/wiki/MIT_License" }
+                });
+            });
 
             ServicePointManager.DefaultConnectionLimit = 200;
         }
@@ -101,20 +114,29 @@ namespace ReleaseNotesGenerator
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseStatusCodePages();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+            app.MapWhen(x => !x.Request.Path.Value.StartsWith("/swagger", StringComparison.OrdinalIgnoreCase),
+                builder =>
+                {
+                    builder.UseMvc(routes =>
+                    {
+                        routes.MapRoute(
+                            name: "default",
+                            template: "{controller=Home}/{action=Index}/{id?}");
 
-                routes.MapSpaFallbackRoute(
-                    name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index" });
+                        routes.MapSpaFallbackRoute(
+                            name: "spa-fallback",
+                            defaults: new {controller = "Home", action = "Index"});
+                    });
+                });
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Release Notes Generator API V1");
             });
 
-            app.UseSwagger();
-            app.UseSwaggerUi();
             ReleaseNotesContext.Migrate(app);
+            //ConfigureLogging();
         }
 
         private void ConfigureLogging()

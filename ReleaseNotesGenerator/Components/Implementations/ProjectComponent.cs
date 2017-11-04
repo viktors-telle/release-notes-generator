@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using ReleaseNotesGenerator.Components.Interfaces;
@@ -26,6 +27,11 @@ namespace ReleaseNotesGenerator.Components.Implementations
         public async Task<Project> GetById(int id)
         {
             return await _context.Projects.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<Project>> GetProjects()
+        {
+            return await _context.Projects.ToListAsync();
         }
 
         public async Task<int> Add(Project project)

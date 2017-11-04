@@ -1,5 +1,6 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ReleaseNotesGenerator.Components.Interfaces;
 using ReleaseNotesGenerator.Domain;
@@ -16,7 +17,14 @@ namespace ReleaseNotesGenerator.Api
             _projectComponent = projectComponent;
         }
 
-        [Authorize(Policy = "ModifyRepository")]
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<Project>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetProjects()
+        {
+            var projects = await _projectComponent.GetProjects();
+            return Ok(projects);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -26,7 +34,7 @@ namespace ReleaseNotesGenerator.Api
                 return NotFound();
             }
 
-            return new ObjectResult(project);
+            return Ok(project);
         }
 
         [HttpPost]
@@ -43,7 +51,7 @@ namespace ReleaseNotesGenerator.Api
             }
 
             await _projectComponent.Add(project);
-            return new ObjectResult(project);
+            return Ok(project);
         }
 
         [HttpPut("{id}")]
