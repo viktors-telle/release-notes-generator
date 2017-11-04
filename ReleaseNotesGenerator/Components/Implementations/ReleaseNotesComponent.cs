@@ -26,6 +26,11 @@ namespace ReleaseNotesGenerator.Components.Implementations
             _mapper = mapper;
         }
 
+        public async Task Save(string releaseNotes)
+        {
+            
+        }
+
         public async Task<string> Get(ReleaseNotesRequest releaseNotes)
         {
             var project = await _context.Projects.FirstOrDefaultAsync(p => p.Name == releaseNotes.ProjectName && !p.IsDeactivated);
