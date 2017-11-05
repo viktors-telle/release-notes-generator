@@ -2,8 +2,8 @@
     
     export class Field {
         
-        title: string
-        state: string
+        title: string;
+        state: string;
         }
 
     

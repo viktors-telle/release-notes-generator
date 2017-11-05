@@ -3,10 +3,10 @@
 import { EntityBase } from './EntityBase';
     export class RepositoryItemPath extends EntityBase<number> {
         
-        path: string
-        branchId: number
-        lastCommitId: string
-        branch: Branch
+        path: string;
+        branchId: number;
+        lastCommitId: string;
+        branch: Branch;
         }
 
     
