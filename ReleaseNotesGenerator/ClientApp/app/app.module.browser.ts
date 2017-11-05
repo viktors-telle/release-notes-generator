@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { AppModuleShared } from './app.module.shared';
 import { AppComponent } from './components/app/app.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { ProjectService } from './services/projectservice';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -10,7 +11,8 @@ import { BrowserModule } from '@angular/platform-browser';
         AppModuleShared
     ],
     providers: [
-         { provide: 'BASE_URL', useFactory: getBaseUrl }
+         { provide: 'BASE_URL', useFactory: getBaseUrl },
+         ProjectService
     ]
 })
 export class AppModule {
