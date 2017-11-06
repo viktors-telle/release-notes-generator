@@ -23,6 +23,8 @@ namespace ReleaseNotesGenerator.Dal
 
         public DbSet<RepositoryItemPath> RepositoryItemPaths { get; set; }
 
+        public DbSet<ReleaseNote> ReleaseNotes { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.AddEntityConfigurationsFromAssembly(GetType().Assembly);

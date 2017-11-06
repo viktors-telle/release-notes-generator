@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -11,12 +10,12 @@ using ReleaseNotesGenerator.Domain;
 using ReleaseNotesGenerator.Domain.Commit;
 using ReleaseNotesGenerator.Dto;
 using ReleaseNotesGenerator.Exceptions;
+using ReleaseNotesGenerator.Extensions;
 
 namespace ReleaseNotesGenerator.Components.Implementations
 {
     public class ReleaseNotesComponent : IReleaseNotesComponent
     {
-        private readonly Regex _regex = new Regex(@"(?<=#)\d+", RegexOptions.Compiled);
         private readonly ReleaseNotesContext _context;
         private readonly IMapper _mapper;
 
@@ -24,19 +23,14 @@ namespace ReleaseNotesGenerator.Components.Implementations
         {
             _context = context;
             _mapper = mapper;
-        }
-
-        public async Task Save(string releaseNotes)
-        {
-            
-        }
+        }        
 
         public async Task<string> Get(ReleaseNotesRequest releaseNotes)
         {
             var project = await _context.Projects.FirstOrDefaultAsync(p => p.Name == releaseNotes.ProjectName && !p.IsDeactivated);
             if (project == null)
             {
-                throw new ProjectIsDeactivatedException();
+                throw new ProjectNotExistsOrIsDeactivatedException();
             }
 
             await _context.Entry(project).Collection(r => r.Repositories).LoadAsync();
@@ -48,8 +42,8 @@ namespace ReleaseNotesGenerator.Components.Implementations
 
             using (var transaction = _context.Database.BeginTransaction())
             {
-                var commits = await GetCommits(repository, releaseNotes.BranchName, releaseNotes.RepositoryItemPath);
-                var workItemIds = GetDistinctWorkItemsIdsFromCommits(commits).ToArray();
+                var commits = await GetCommits(repository, releaseNotes.BranchName, releaseNotes.RepositoryItemPath);                
+                var workItemIds = commits.GetDistinctWorkItemsIdsFromCommits().ToArray();
                 if (!workItemIds.Any())
                 {
                     throw new RelatedWorkItemsNotFoundException();
@@ -61,11 +55,12 @@ namespace ReleaseNotesGenerator.Components.Implementations
                 var workItems = await projectTrackingToolHandler.GetWorkItems(projectTrackingTool, workItemIds);
 
                 var linksToWorkItems = projectTrackingToolHandler.CreateLinksToWorkItems(projectTrackingTool, workItems);
+                await Save(linksToWorkItems, repository.Id);
 
                 transaction.Commit();
                 return linksToWorkItems;
             }
-        }
+        }       
 
         private async Task<IList<Commit>> GetCommits(Repository repository, string branchName, string repositoryItemPath)
         {
@@ -129,22 +124,16 @@ namespace ReleaseNotesGenerator.Components.Implementations
             await _context.SaveChangesAsync();
         }
 
-        private IEnumerable<string> GetDistinctWorkItemsIdsFromCommits(IEnumerable<Commit> commits)
+        private async Task<int> Save(string releaseNotes, int repositoryId)
         {
-            var relatedWorkItems = new List<string>();
-            foreach (var commit in commits)
+            var releaseNote = new ReleaseNote
             {
-                var matches = _regex.Matches(commit.Comment);
-                foreach (Match match in matches)
-                {
-                    if (!relatedWorkItems.Contains(match.Value))
-                    {
-                        relatedWorkItems.Add(match.Value);
-                    }
-                }
-            }
-
-            return relatedWorkItems;
+                Notes = releaseNotes,
+                Created = DateTime.UtcNow,
+                RepositoryId = repositoryId
+            };
+            _context.ReleaseNotes.Add(releaseNote);
+            return await _context.SaveChangesAsync();
         }
     }
 }

@@ -25,6 +25,8 @@ namespace ReleaseNotesGenerator.Domain
 
         public ProjectTrackingTool ProjectTrackingTool { get; set; }
 
-        public List<Branch> Branches { get; set; }        
+        public List<Branch> Branches { get; set; }      
+        
+        public List<ReleaseNote> ReleaseNotes { get; set; }
     }
 }
