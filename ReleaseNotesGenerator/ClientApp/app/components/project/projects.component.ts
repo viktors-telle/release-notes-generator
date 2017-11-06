@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../services/projectservice';
-import { Project } from '../../common/interfaces/Project';
+import { Project } from '../../common/classes/project';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'projects',
@@ -9,16 +10,18 @@ import { Project } from '../../common/interfaces/Project';
     providers: [ProjectService]
 })
 export class ProjectsComponent implements OnInit {
-    projects: Project[];
+    projects: Observable<Project[]>;
+    //projects: Project[];
 
     constructor(private projectService: ProjectService) {
 
     }
 
     ngOnInit() {
-        this.projectService.getProjects().subscribe((projects: Project[]) => {
-            console.log(projects);
-            this.projects = projects;
-        });
+        this.projects = this.projectService.getProjects();        
+        // this.projectService.getProjects().subscribe((projects: Project[]) => {
+        //     console.log(projects);
+        //     this.projects = projects;
+        // });
     }
 }

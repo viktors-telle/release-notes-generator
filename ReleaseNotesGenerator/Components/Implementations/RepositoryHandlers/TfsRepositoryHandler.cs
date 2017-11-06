@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using ReleaseNotesGenerator.Components.Interfaces;
 using ReleaseNotesGenerator.Domain.Commit;
 
-namespace ReleaseNotesGenerator.Components.Implementations
+namespace ReleaseNotesGenerator.Components.Implementations.RepositoryHandlers
 {
     public class TfsRepositoryHandler : IRepositoryHandler
     {

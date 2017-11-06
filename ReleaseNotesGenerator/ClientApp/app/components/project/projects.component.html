@@ -1,1 +1,19 @@
-<div class="row">Projects</div>
+<h1>Projects</h1>
+<div class="table">
+    <table class="table table-responsive table-striped table-hover">
+        <thead>
+            <th>Project name</th>
+            <th>Is deactivated</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let project of projects | async">
+                <td>{{project.name}}</td>
+                <td>{{project.isDeactivated}}</td>
+            </tr>
+            <tr *ngIf="(projects | async)?.length === 0">
+                <td>&nbsp;</td>
+                <td colspan="2">No Records Found</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

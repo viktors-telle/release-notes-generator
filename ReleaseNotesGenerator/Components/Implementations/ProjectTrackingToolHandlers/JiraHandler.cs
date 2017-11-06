@@ -5,7 +5,7 @@ using ReleaseNotesGenerator.Components.Interfaces;
 using ReleaseNotesGenerator.Domain;
 using ReleaseNotesGenerator.Domain.WorkItem;
 
-namespace ReleaseNotesGenerator.Components.Implementations
+namespace ReleaseNotesGenerator.Components.Implementations.ProjectTrackingToolHandlers
 {
     public class JiraHandler : IProjectTrackingToolHandler
     {

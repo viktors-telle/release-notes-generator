@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 using ReleaseNotesGenerator.Components.Interfaces;
 using ReleaseNotesGenerator.Domain.Commit;
 
-namespace ReleaseNotesGenerator.Components.Implementations
+namespace ReleaseNotesGenerator.Components.Implementations.RepositoryHandlers
 {
     public class GitRepositoryHandler : IRepositoryHandler
     {

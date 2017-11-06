@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using ReleaseNotesGenerator.Components.Implementations;
+using ReleaseNotesGenerator.Components.Implementations.ProjectTrackingToolHandlers;
+using ReleaseNotesGenerator.Components.Implementations.RepositoryHandlers;
 using ReleaseNotesGenerator.Components.Interfaces;
 using ReleaseNotesGenerator.Dal;
 using ReleaseNotesGenerator.Dto.Options;
@@ -136,7 +138,7 @@ namespace ReleaseNotesGenerator
             });
 
             ReleaseNotesContext.Migrate(app);
-            //ConfigureLogging();
+            ConfigureLogging();
         }
 
         private void ConfigureLogging()
