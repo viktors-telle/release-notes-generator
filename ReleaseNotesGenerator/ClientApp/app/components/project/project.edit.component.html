@@ -1,0 +1,42 @@
+<div>
+    <header>
+        <h3>
+            {{ project.name }}
+        </h3>
+    </header>
+    <br />
+    <form [formGroup]="projectForm" (ngSubmit)="submit(projectForm)" class="editForm" novalidate>
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" formControlName="name" />
+            <div class="alert alert-danger" [hidden]="projectForm.controls.name.untouched || projectForm.controls.name.valid">Name is required</div>
+        </div>
+        <div class="form-group">
+            <label>Api Key</label>
+            <input type="text" class="form-control" formControlName="apiKey">
+            <div class="alert alert-danger" [hidden]="projectForm.controls.apiKey.untouched || projectForm.controls.apiKey.valid">Api Key is required</div>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" formControlName="isDeactivated">Is Deactivated
+            </label>           
+        </div>
+        <br />
+
+        <div *ngIf="project">
+            <!-- <div class="alert alert-warning" *ngIf="customer.id">
+           Delete Customer?&nbsp;&nbsp;<button class="btn btn-danger" (click)="delete($event)">Yes</button>&nbsp;&nbsp;
+           <button class="btn btn-default" (click)="deleteMessageEnabled = false">No</button>
+        </div> -->
+            <!-- <button class="btn btn-danger" *ngIf="customer.id && !deleteMessageEnabled" (click)="deleteMessageEnabled = true">Delete</button>&nbsp;&nbsp; -->
+
+            <div class="pull-left">
+                <button type="submit" class="btn btn-success" [disabled]="!projectForm.valid">Save</button>
+                <button class="btn btn-default" (click)="cancel($event)">Cancel</button>&nbsp;&nbsp;
+            </div>
+        </div>
+        <br />
+        <br />
+        <!-- <div class="alert alert-danger" *ngIf="errorMessage != null">{{ errorMessage }}</div> -->
+    </form>
+</div>

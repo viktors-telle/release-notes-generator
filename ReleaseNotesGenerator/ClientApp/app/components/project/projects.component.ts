@@ -11,7 +11,6 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ProjectsComponent implements OnInit {
     projects: Observable<Project[]>;
-    //projects: Project[];
 
     constructor(private projectService: ProjectService) {
 
@@ -19,9 +18,9 @@ export class ProjectsComponent implements OnInit {
 
     ngOnInit() {
         this.projects = this.projectService.getProjects();        
-        // this.projectService.getProjects().subscribe((projects: Project[]) => {
-        //     console.log(projects);
-        //     this.projects = projects;
-        // });
+    }
+
+    private addProject() {
+        
     }
 }
