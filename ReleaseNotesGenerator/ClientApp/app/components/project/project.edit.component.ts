@@ -22,6 +22,7 @@ export class ProjectEditComponent implements OnInit {
     };
     projectForm: FormGroup;
     errorMessage: string;
+    formIsLoaded: boolean = false;
 
     constructor(private projectService: ProjectService,
         private route: ActivatedRoute,
@@ -43,7 +44,7 @@ export class ProjectEditComponent implements OnInit {
         this.projectService.getProject(id)
           .subscribe((project: Project) => {
             this.project = project;
-            this.buildForm();
+            this.buildForm();            
           },
           (err: any) => console.log(err));
     }
@@ -54,13 +55,14 @@ export class ProjectEditComponent implements OnInit {
           apiKey:   [this.project.apiKey, Validators.required],
           isDeactivated:     [this.project.isDeactivated, Validators.required],      
         });
+        this.formIsLoaded = true;
     }
 
     submit({value, valid} : { value: Project, valid: boolean }) {
         if (!valid) {
             return;
         }
-
+        value.id = this.project.id;
         if (value.id) {
             this.projectService.updateProject(value).subscribe((project: Project) => {
                 this.router.navigate(["projects"]);
