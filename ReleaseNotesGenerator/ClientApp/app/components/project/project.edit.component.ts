@@ -21,6 +21,7 @@ export class ProjectEditComponent implements OnInit {
         repositories: [ ]
     };
     projectForm: FormGroup;
+    errorMessage: string;
 
     constructor(private projectService: ProjectService,
         private route: ActivatedRoute,
@@ -31,8 +32,9 @@ export class ProjectEditComponent implements OnInit {
     ngOnInit() {
         let id = this.route.snapshot.params['id'];
         if (id !== '0') {
-          this.getProject(id);
-        }   
+          this.getProject(id);         
+          return;
+        } 
 
         this.buildForm();
     }
@@ -41,6 +43,7 @@ export class ProjectEditComponent implements OnInit {
         this.projectService.getProject(id)
           .subscribe((project: Project) => {
             this.project = project;
+            this.buildForm();
           },
           (err: any) => console.log(err));
     }
@@ -53,8 +56,30 @@ export class ProjectEditComponent implements OnInit {
         });
     }
 
-    submit() {
-        console.log("Form submitted");
+    submit({value, valid} : { value: Project, valid: boolean }) {
+        if (!valid) {
+            return;
+        }
+
+        if (value.id) {
+            this.projectService.updateProject(value).subscribe((project: Project) => {
+                this.router.navigate(["projects"]);
+                console.log("Project updated!")
+            },
+            (err: any) => {
+                console.log(err);
+                this.errorMessage = "Error occured while updating project."
+            });          
+        } else {
+            this.projectService.insertProject(value).subscribe((project: Project) => {
+                this.router.navigate(["projects"]);
+                console.log("Project inserted!")
+            },
+            (err: any) => {
+                console.log(err);
+                this.errorMessage = "Error occured while inserting new project."
+            });            
+        }
     }
 
     cancel(event: Event) {

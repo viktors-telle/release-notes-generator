@@ -10,7 +10,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let project of projects | async">
-                <td>{{project.name}}</td>
+                <td><a [routerLink]="['/projects', project.id]">{{project.name}}</a></td>
                 <td>{{project.isDeactivated}}</td>
             </tr>
             <tr *ngIf="(projects | async)?.length === 0">

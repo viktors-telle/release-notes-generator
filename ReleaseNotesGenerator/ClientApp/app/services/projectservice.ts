@@ -18,4 +18,12 @@ export class ProjectService {
     getProject(id: string) : Observable<Project> {
         return this.httpClient.get<Project>(`${this.baseUrl}/api/projects/${id}`);
     }
+
+    insertProject(project: Project) : Observable<Project> {
+        return this.httpClient.post<Project>(`${this.baseUrl}/api/projects`, project);
+    }
+
+    updateProject(project: Project) : Observable<Project> {
+        return this.httpClient.put<Project>(`${this.baseUrl}/api/projects/${project.id}`, project);
+    }
 }

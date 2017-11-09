@@ -7,7 +7,7 @@
     <br />
     <form [formGroup]="projectForm" (ngSubmit)="submit(projectForm)" class="editForm" novalidate>
         <div class="form-group">
-            <label>First Name</label>
+            <label>Name</label>
             <input type="text" class="form-control" formControlName="name" />
             <div class="alert alert-danger" [hidden]="projectForm.controls.name.untouched || projectForm.controls.name.valid">Name is required</div>
         </div>
