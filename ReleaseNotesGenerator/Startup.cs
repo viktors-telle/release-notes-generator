@@ -67,6 +67,8 @@ namespace ReleaseNotesGenerator
                 () => serviceProvider.GetService<GitRepositoryHandler>());
             RepositoryFactory<IRepositoryHandler>.Register(RepositoryType.Tfs,
                 () => serviceProvider.GetService<TfsRepositoryHandler>());
+            RepositoryFactory<IRepositoryHandler>.Register(RepositoryType.GitHub,
+                () => serviceProvider.GetService<GitHubRepositoryHandler>());
 
             ProjectTrackingToolFactory<IProjectTrackingToolHandler>.Register(ProjectTrackingToolType.Tfs,
                 () => serviceProvider.GetService<TfsHandler>());

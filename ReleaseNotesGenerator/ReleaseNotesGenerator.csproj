@@ -53,6 +53,9 @@
     <None Update="ClientApp\app\common\classes\Repository.ts">
       <CustomToolNamespace>Domain\Repository.cs</CustomToolNamespace>
     </None>
+    <None Update="ClientApp\app\common\classes\RepositoryType.ts">
+      <CustomToolNamespace>Enums\RepositoryType.cs</CustomToolNamespace>
+    </None>
     <None Update="ClientApp\app\common\interfaces\Author.ts">
       <CustomToolNamespace>Domain\Commit\Author.cs</CustomToolNamespace>
     </None>
