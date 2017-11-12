@@ -24,6 +24,8 @@ namespace ReleaseNotesGenerator.Mappings
                 .ForMember(src => src.Id, dest => dest.Ignore());
 
             CreateMap<ReleaseNotesRequest, ReleaseNote>();
+
+            CreateMap<ReleaseNotesRequest, CommitQuery>();
         }
     }
 }

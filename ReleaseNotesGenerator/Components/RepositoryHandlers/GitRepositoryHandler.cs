@@ -29,9 +29,9 @@ namespace ReleaseNotesGenerator.Components.RepositoryHandlers
                 { "toDate", query.Until.ToString("s") + "Z" }
             };
 
-            if (!string.IsNullOrEmpty(query.ItemPath))
+            if (!string.IsNullOrEmpty(query.RepositoryPath))
             {
-                queryParameters.Add("itemPath", query.ItemPath);             
+                queryParameters.Add("itemPath", query.RepositoryPath);             
             }       
              
             while (commitCount == 100)

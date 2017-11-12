@@ -3,10 +3,10 @@
 namespace ReleaseNotesGenerator.Tests
 {
     [TestFixture]
-    public class UnitTest1
+    public class GitHubRepositoryHandlerTests
     {
         [Test]        
-        public void TestMethod1()
+        public void GetCommits()
         {
         }
     }

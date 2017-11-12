@@ -31,7 +31,7 @@ namespace ReleaseNotesGenerator.Components
             var repository = await GetRepository(request);
             using (var transaction = _context.Database.BeginTransaction())
             {
-                var commits = await GetCommits(repository);
+                var commits = await GetCommits(repository, request);
                 var releaseNotes = await GenerateReleaseNotes(commits, repository);
                 await Save(releaseNotes, repository.Id, request);
                 transaction.Commit();
@@ -53,14 +53,17 @@ namespace ReleaseNotesGenerator.Components
                 project.Repositories.FirstOrDefault(
                     r => r.Name.Equals(request.RepositoryName, StringComparison.InvariantCultureIgnoreCase));
             if (repository == null)
+            {
                 throw new RepositoryNotFoundException();
+            }                
 
             return repository;
         }
 
-        private async Task<IList<Commit>> GetCommits(Repository repository)
+        private async Task<IList<Commit>> GetCommits(Repository repository, ReleaseNotesRequest request)
         {
             var commitQuery = _mapper.Map<Repository, CommitQuery>(repository);
+            _mapper.Map(request, commitQuery);
             var repositoryHandler = RepositoryFactory<IRepositoryHandler>.Create(repository.RepositoryType);
             var commits = (await repositoryHandler.GetCommits(commitQuery)).ToList();
 

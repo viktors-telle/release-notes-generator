@@ -10,7 +10,9 @@ namespace ReleaseNotesGenerator.Domain
         public string Name { get; set; }
 
         [Required]
-        public string Url { get; set; }        
+        public string Url { get; set; }
+
+        public string Owner { get; set; }
 
         [Required]
         public int ProjectId { get; set; }

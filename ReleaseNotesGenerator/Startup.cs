@@ -49,6 +49,8 @@ namespace ReleaseNotesGenerator
             services.AddDbContext<ReleaseNotesContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("ReleaseNotesGenerator")));
 
+            services.AddSingleton<HttpClientFactory>();
+
             services.AddScoped<IProjectComponent, ProjectComponent>();
             services.AddScoped<IRepositoryComponent, RepositoryComponent>();
             services.AddScoped<IReleaseNotesComponent, ReleaseNotesComponent>();
@@ -58,6 +60,11 @@ namespace ReleaseNotesGenerator
             services.AddScoped<JiraHandler, JiraHandler>();
             services.AddScoped<GitRepositoryHandler, GitRepositoryHandler>();
             services.AddScoped<TfsRepositoryHandler, TfsRepositoryHandler>();
+            
+            //services.AddScoped<GitHubRepositoryHandler>(() => new GitHubRepositoryHandler(() => serviceProvider.GetService<HttpClientFactory>()));
+
+            services.AddScoped(
+                provider => new GitHubRepositoryHandler(provider.GetService<HttpClientFactory>()));
 
             var serviceProvider = services.BuildServiceProvider();
             RepositoryFactory<IRepositoryHandler>.Register(RepositoryType.Git,

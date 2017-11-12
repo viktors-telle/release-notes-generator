@@ -43,6 +43,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="ClientApp\app\common\classes\Commit.ts">
+      <CustomToolNamespace>Domain\Commit\Commit.cs</CustomToolNamespace>
+    </None>
     <None Update="ClientApp\app\common\classes\CommitListExtensions.ts">
       <CustomToolNamespace>Domain\Extensions\CommitListExtensions.cs</CustomToolNamespace>
     </None>

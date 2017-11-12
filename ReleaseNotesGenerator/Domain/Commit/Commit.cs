@@ -10,6 +10,8 @@
 
         public string Comment { get; set; }
 
-        public bool CommentTruncated { get; set; }        
+        public bool CommentTruncated { get; set; }
+
+        public string Message { get; set; }
     }
 }
