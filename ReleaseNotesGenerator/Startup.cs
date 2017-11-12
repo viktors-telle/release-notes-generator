@@ -52,10 +52,8 @@ namespace ReleaseNotesGenerator
 
             services.AddScoped<IProjectComponent, ProjectComponent>();
             services.AddScoped<IRepositoryComponent, RepositoryComponent>();
-            services.AddScoped<IBranchComponent, BranchComponent>();
             services.AddScoped<IReleaseNotesComponent, ReleaseNotesComponent>();
             services.AddScoped<IProjectTrackingToolComponent, ProjectTrackingToolComponent>();
-            services.AddScoped<IRepositoryItemPathComponent, RepositoryItemPathComponent>();
             services.AddScoped<IEmailComponent, EmailComponent>();
             services.AddScoped<TfsHandler, TfsHandler>();
             services.AddScoped<JiraHandler, JiraHandler>();
@@ -67,6 +65,8 @@ namespace ReleaseNotesGenerator
                 () => serviceProvider.GetService<GitRepositoryHandler>());
             RepositoryFactory<IRepositoryHandler>.Register(RepositoryType.Tfs,
                 () => serviceProvider.GetService<TfsRepositoryHandler>());
+            RepositoryFactory<IRepositoryHandler>.Register(RepositoryType.GitHub,
+                () => serviceProvider.GetService<GitHubRepositoryHandler>());
 
             ProjectTrackingToolFactory<IProjectTrackingToolHandler>.Register(ProjectTrackingToolType.Tfs,
                 () => serviceProvider.GetService<TfsHandler>());

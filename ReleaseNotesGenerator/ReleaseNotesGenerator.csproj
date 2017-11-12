@@ -40,6 +40,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\app\services\" />
+    <Folder Include="Migrations\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
 
@@ -47,11 +48,20 @@
     <None Update="ClientApp\app\common\classes\CommitListExtensions.ts">
       <CustomToolNamespace>Domain\Extensions\CommitListExtensions.cs</CustomToolNamespace>
     </None>
+    <None Update="ClientApp\app\common\classes\CommitQuery.ts">
+      <CustomToolNamespace>Domain\Commit\CommitQuery.cs</CustomToolNamespace>
+    </None>
     <None Update="ClientApp\app\common\classes\ReleaseNote.ts">
       <CustomToolNamespace>Domain\ReleaseNote.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\app\common\classes\Repository.ts">
       <CustomToolNamespace>Domain\Repository.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\app\common\classes\RepositoryItemPath.ts">
+      <CustomToolNamespace>Domain\RepositoryItemPath.cs</CustomToolNamespace>
+    </None>
+    <None Update="ClientApp\app\common\classes\RepositoryType.ts">
+      <CustomToolNamespace>Enums\RepositoryType.cs</CustomToolNamespace>
     </None>
     <None Update="ClientApp\app\common\interfaces\Author.ts">
       <CustomToolNamespace>Domain\Commit\Author.cs</CustomToolNamespace>

@@ -21,33 +21,6 @@ namespace ReleaseNotesGenerator.Migrations
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ReleaseNotesGenerator.Domain.Branch", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime?>("LastCommitDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastCommitId")
-                        .HasMaxLength(512);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(256);
-
-                    b.Property<int>("RepositoryId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RepositoryId");
-
-                    b.HasIndex("Name", "RepositoryId")
-                        .IsUnique();
-
-                    b.ToTable("Branches","rng");
-                });
-
             modelBuilder.Entity("ReleaseNotesGenerator.Domain.Project", b =>
                 {
                     b.Property<int>("Id")
@@ -107,13 +80,26 @@ namespace ReleaseNotesGenerator.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("BranchName")
+                        .IsRequired()
+                        .HasMaxLength(256);
+
                     b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("From")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Notes")
                         .IsRequired();
 
                     b.Property<int>("RepositoryId");
+
+                    b.Property<string>("RepositoryPath")
+                        .HasMaxLength(256);
+
+                    b.Property<DateTime>("Until")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -153,38 +139,6 @@ namespace ReleaseNotesGenerator.Migrations
                     b.ToTable("Repositories","rng");
                 });
 
-            modelBuilder.Entity("ReleaseNotesGenerator.Domain.RepositoryItemPath", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("BranchId");
-
-                    b.Property<string>("LastCommitId")
-                        .HasMaxLength(512);
-
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BranchId");
-
-                    b.HasIndex("Path", "BranchId")
-                        .IsUnique();
-
-                    b.ToTable("RepositoryItemPaths","rng");
-                });
-
-            modelBuilder.Entity("ReleaseNotesGenerator.Domain.Branch", b =>
-                {
-                    b.HasOne("ReleaseNotesGenerator.Domain.Repository", "Repository")
-                        .WithMany("Branches")
-                        .HasForeignKey("RepositoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("ReleaseNotesGenerator.Domain.ReleaseNote", b =>
                 {
                     b.HasOne("ReleaseNotesGenerator.Domain.Repository", "Repository")
@@ -203,14 +157,6 @@ namespace ReleaseNotesGenerator.Migrations
                     b.HasOne("ReleaseNotesGenerator.Domain.ProjectTrackingTool", "ProjectTrackingTool")
                         .WithMany("Repositories")
                         .HasForeignKey("ProjectTrackingToolId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ReleaseNotesGenerator.Domain.RepositoryItemPath", b =>
-                {
-                    b.HasOne("ReleaseNotesGenerator.Domain.Branch", "Branch")
-                        .WithMany("RepositoryItemPaths")
-                        .HasForeignKey("BranchId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
