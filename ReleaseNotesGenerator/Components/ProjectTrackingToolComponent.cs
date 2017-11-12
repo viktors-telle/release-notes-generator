@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
-using ReleaseNotesGenerator.Components.Interfaces;
 using ReleaseNotesGenerator.Dal;
 using ReleaseNotesGenerator.Domain;
 
-namespace ReleaseNotesGenerator.Components.Implementations
+namespace ReleaseNotesGenerator.Components
 {
     public class ProjectTrackingToolComponent : IProjectTrackingToolComponent
     {

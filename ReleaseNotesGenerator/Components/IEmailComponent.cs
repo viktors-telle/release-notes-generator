@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using ReleaseNotesGenerator.Dto;
 
-namespace ReleaseNotesGenerator.Components.Interfaces
+namespace ReleaseNotesGenerator.Components
 {
     public interface IEmailComponent
     {

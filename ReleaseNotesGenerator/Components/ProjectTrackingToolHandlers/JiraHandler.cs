@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ReleaseNotesGenerator.Components.Interfaces;
 using ReleaseNotesGenerator.Domain;
 using ReleaseNotesGenerator.Domain.WorkItem;
 
-namespace ReleaseNotesGenerator.Components.Implementations.ProjectTrackingToolHandlers
+namespace ReleaseNotesGenerator.Components.ProjectTrackingToolHandlers
 {
     public class JiraHandler : IProjectTrackingToolHandler
     {

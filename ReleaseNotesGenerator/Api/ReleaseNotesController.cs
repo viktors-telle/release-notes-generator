@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using ReleaseNotesGenerator.Components.Interfaces;
+using ReleaseNotesGenerator.Components;
 using ReleaseNotesGenerator.Dto;
 using ReleaseNotesGenerator.Exceptions;
 

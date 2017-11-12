@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ReleaseNotesGenerator.Components.Interfaces;
 using ReleaseNotesGenerator.Domain.Commit;
 
-namespace ReleaseNotesGenerator.Components.Implementations.RepositoryHandlers
+namespace ReleaseNotesGenerator.Components.RepositoryHandlers
 {
-    public class TfsRepositoryHandler : IRepositoryHandler
+    public class GitHubRepositoryHandler : IRepositoryHandler
     {
         public Task<IList<Commit>> GetCommits(CommitQuery query)
         {

@@ -6,10 +6,9 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
-using ReleaseNotesGenerator.Components.Interfaces;
 using ReleaseNotesGenerator.Domain.Commit;
 
-namespace ReleaseNotesGenerator.Components.Implementations.RepositoryHandlers
+namespace ReleaseNotesGenerator.Components.RepositoryHandlers
 {
     public class GitRepositoryHandler : IRepositoryHandler
     {

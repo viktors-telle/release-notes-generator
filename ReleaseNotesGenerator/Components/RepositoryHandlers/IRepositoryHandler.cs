@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ReleaseNotesGenerator.Domain.Commit;
 
-namespace ReleaseNotesGenerator.Components.Interfaces
+namespace ReleaseNotesGenerator.Components.RepositoryHandlers
 {
     public interface IRepositoryHandler
     {
