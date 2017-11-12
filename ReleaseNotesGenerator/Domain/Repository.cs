@@ -23,9 +23,7 @@ namespace ReleaseNotesGenerator.Domain
         [Required]
         public int ProjectTrackingToolId { get; set; }
 
-        public ProjectTrackingTool ProjectTrackingTool { get; set; }
-
-        public List<Branch> Branches { get; set; }      
+        public ProjectTrackingTool ProjectTrackingTool { get; set; }   
         
         public List<ReleaseNote> ReleaseNotes { get; set; }
     }

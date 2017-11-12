@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ReleaseNotesGenerator.Dto
 {
@@ -13,6 +14,12 @@ namespace ReleaseNotesGenerator.Dto
         [Required]
         public string BranchName { get; set; }
 
-        public string RepositoryItemPath { get; set; }
+        [Required]
+        public DateTime From { get; set; }
+
+        [Required]
+        public DateTime Until { get; set; }
+
+        public string RepositoryPath { get; set; }
     }
 }

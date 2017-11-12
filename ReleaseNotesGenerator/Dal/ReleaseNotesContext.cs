@@ -19,10 +19,6 @@ namespace ReleaseNotesGenerator.Dal
 
         public DbSet<ProjectTrackingTool> ProjectTrackingTools { get; set; }
 
-        public DbSet<Branch> Branches { get; set; }
-
-        public DbSet<RepositoryItemPath> RepositoryItemPaths { get; set; }
-
         public DbSet<ReleaseNote> ReleaseNotes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

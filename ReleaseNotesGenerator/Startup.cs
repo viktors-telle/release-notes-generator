@@ -52,10 +52,8 @@ namespace ReleaseNotesGenerator
 
             services.AddScoped<IProjectComponent, ProjectComponent>();
             services.AddScoped<IRepositoryComponent, RepositoryComponent>();
-            services.AddScoped<IBranchComponent, BranchComponent>();
             services.AddScoped<IReleaseNotesComponent, ReleaseNotesComponent>();
             services.AddScoped<IProjectTrackingToolComponent, ProjectTrackingToolComponent>();
-            services.AddScoped<IRepositoryItemPathComponent, RepositoryItemPathComponent>();
             services.AddScoped<IEmailComponent, EmailComponent>();
             services.AddScoped<TfsHandler, TfsHandler>();
             services.AddScoped<JiraHandler, JiraHandler>();

@@ -6,6 +6,7 @@ import { EntityBase } from './EntityBase';
         path: string;
         branchId: number;
         lastCommitId: string;
+        lastCommitDateTime: Date;
         branch: Branch;
         }
 

@@ -11,5 +11,13 @@ namespace ReleaseNotesGenerator.Domain
         public int RepositoryId { get; set; }
 
         public Repository Repository { get; set; }
+
+        public string RepositoryPath { get; set; }
+
+        public string BranchName { get; set; }
+
+        public DateTime From { get; set; }
+
+        public DateTime Until { get; set; }
     }
 }

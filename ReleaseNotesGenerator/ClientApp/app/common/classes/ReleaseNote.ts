@@ -7,6 +7,10 @@ import { EntityBase } from './EntityBase';
         created: Date;
         repositoryId: number;
         repository: Repository;
+        repositoryPath: string;
+        branchName: string;
+        from: Date;
+        until: Date;
         }
 
     

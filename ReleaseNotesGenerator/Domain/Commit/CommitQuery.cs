@@ -8,12 +8,12 @@ namespace ReleaseNotesGenerator.Domain.Commit
 
         public string BranchName { get; set; }
 
-        public string LastCommitId { get; set; }
-
-        public DateTime? DateTime { get; set; }
-
         public string RepositoryName { get; set; }
 
         public string ItemPath { get; set; }
+
+        public DateTime From { get; set; }
+
+        public DateTime Until { get; set; }
     }
 }

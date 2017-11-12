@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using ReleaseNotesGenerator.Enums;
 
-namespace ReleaseNotesGenerator.Components.Implementations
+namespace ReleaseNotesGenerator.Components.Implementations.RepositoryHandlers
 {
     public class RepositoryFactory<T>
     {
@@ -12,8 +12,7 @@ namespace ReleaseNotesGenerator.Components.Implementations
 
         public static T Create(RepositoryType repositoryType)
         {
-            Func<T> constructor;
-            if (Implementations.TryGetValue(repositoryType, out constructor))
+            if (Implementations.TryGetValue(repositoryType, out Func<T> constructor))
             {
                 return constructor();
             }

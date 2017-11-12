@@ -4,10 +4,10 @@
         
         url: string;
         branchName: string;
-        lastCommitId: string;
-        dateTime: Date;
         repositoryName: string;
         itemPath: string;
+        from: Date;
+        until: Date;
         }
 
     

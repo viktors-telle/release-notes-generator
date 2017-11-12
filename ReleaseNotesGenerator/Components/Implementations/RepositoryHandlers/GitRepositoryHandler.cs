@@ -26,27 +26,14 @@ namespace ReleaseNotesGenerator.Components.Implementations.RepositoryHandlers
                 { "branch", query.BranchName },
                 { "$skip", skip.ToString() },
                 { "$top", top.ToString() },
-                { "toDate", DateTime.Now.ToString("s") + "Z" }
+                { "fromDate", query.From.AddSeconds(1).ToString("s") + "Z" },
+                { "toDate", query.Until.ToString("s") + "Z" }
             };
 
             if (!string.IsNullOrEmpty(query.ItemPath))
             {
-                queryParameters.Add("itemPath", query.ItemPath);
-                var commitDateTime = await GetCommitDateTime(query);
-                queryParameters.Add("fromDate", commitDateTime.AddSeconds(1).ToString("s") + "Z");
-            }
-            else
-            {
-                if (!string.IsNullOrEmpty(query.LastCommitId) && query.DateTime.HasValue)
-                {
-                    queryParameters.Add("fromDate", query.DateTime.Value.AddSeconds(1).ToString("s") + "Z");
-                }
-                else if (!string.IsNullOrEmpty(query.LastCommitId) && !query.DateTime.HasValue)
-                {
-                    var commitDateTime = await GetCommitDateTime(query);
-                    queryParameters.Add("fromDate", commitDateTime.AddSeconds(1).ToString("s") + "Z");
-                }
-            }            
+                queryParameters.Add("itemPath", query.ItemPath);             
+            }       
              
             while (commitCount == 100)
             {
@@ -100,27 +87,6 @@ namespace ReleaseNotesGenerator.Components.Implementations.RepositoryHandlers
             var responseContent = await response.Content.ReadAsStringAsync();
             var commitResponse = JsonConvert.DeserializeObject<Commit>(responseContent);
             return commitResponse;
-        }
-
-        private async Task<DateTime> GetCommitDateTime(CommitQuery query)
-        {
-            var queryParameters = new Dictionary<string, string>
-            {
-                { "api-version", "1.0" }
-            };
-
-            using (var httpClient = new HttpClient(new HttpClientHandler() { UseDefaultCredentials = true }))
-            {
-                httpClient.DefaultRequestHeaders.Accept.Add(
-                    new MediaTypeWithQualityHeaderValue("application/json"));
-
-                var repositoryUrl = QueryHelpers.AddQueryString(new Uri(new Uri(query.Url, UriKind.Absolute),
-                    $"_apis/git/repositories/{query.RepositoryName}/commits/{query.LastCommitId}").ToString(), queryParameters);
-                var response = await httpClient.GetAsync(repositoryUrl);
-                var responseContent = await response.Content.ReadAsStringAsync();
-                var commitResponse = JsonConvert.DeserializeObject<Commit>(responseContent);
-                return commitResponse.Committer.Date;
-            }
         }
     }
 }

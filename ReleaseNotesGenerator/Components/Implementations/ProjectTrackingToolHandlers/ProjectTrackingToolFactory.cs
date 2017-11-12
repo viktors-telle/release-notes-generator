@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using ReleaseNotesGenerator.Enums;
 
-namespace ReleaseNotesGenerator.Components.Implementations
+namespace ReleaseNotesGenerator.Components.Implementations.ProjectTrackingToolHandlers
 {
     public class ProjectTrackingToolFactory<T>
     {
@@ -12,8 +12,7 @@ namespace ReleaseNotesGenerator.Components.Implementations
 
         public static T Create(ProjectTrackingToolType type)
         {
-            Func<T> constructor;
-            if (Implementations.TryGetValue(type, out constructor))
+            if (Implementations.TryGetValue(type, out Func<T> constructor))
             {
                 return constructor();
             }

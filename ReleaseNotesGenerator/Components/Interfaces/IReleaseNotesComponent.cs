@@ -5,6 +5,6 @@ namespace ReleaseNotesGenerator.Components.Interfaces
 {
     public interface IReleaseNotesComponent
     {
-        Task<string> Get(ReleaseNotesRequest releaseNotes);
+        Task<string> Get(ReleaseNotesRequest request);
     }
 }
