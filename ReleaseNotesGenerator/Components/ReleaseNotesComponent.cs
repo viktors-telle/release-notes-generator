@@ -65,7 +65,9 @@ namespace ReleaseNotesGenerator.Components
             var commits = (await repositoryHandler.GetCommits(commitQuery)).ToList();
 
             if (!commits.Any())
+            {
                 throw new CommitsNotFoundException();
+            }                
 
             commits.AddRange(await repositoryHandler.GetCommitsWithFullComments(commitQuery,
                 commits.Where(c => c.CommentTruncated)));

@@ -20,8 +20,7 @@ namespace ReleaseNotesGenerator.Domain
         [Required]
         public RepositoryType RepositoryType { get; set; }
 
-        [Required]
-        public int ProjectTrackingToolId { get; set; }
+        public int? ProjectTrackingToolId { get; set; }
 
         public ProjectTrackingTool ProjectTrackingTool { get; set; }   
         

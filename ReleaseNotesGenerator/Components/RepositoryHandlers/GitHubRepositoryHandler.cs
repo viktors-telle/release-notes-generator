@@ -11,9 +11,9 @@ namespace ReleaseNotesGenerator.Components.RepositoryHandlers
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<Commit>> GetCommitsWithFullComments(CommitQuery query, IEnumerable<Commit> commits)
+        public async Task<IEnumerable<Commit>> GetCommitsWithFullComments(CommitQuery query, IEnumerable<Commit> commits)
         {
-            throw new System.NotImplementedException();
+            return await Task.FromResult(new List<Commit>());
         }
     }
 }
