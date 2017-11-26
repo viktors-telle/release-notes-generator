@@ -13,6 +13,7 @@ namespace ReleaseNotesGenerator.Dal.Configurations
 
             b.Property(p => p.Name).HasMaxLength(256).IsRequired();
             b.Property(p => p.Url).HasMaxLength(2048).IsRequired();
+            b.Property(p => p.Owner).HasMaxLength(128);
 
             b.HasIndex(p => new { p.Name, p.Url }).IsUnique();
             b.HasOne(r => r.Project).WithMany(p => p.Repositories);

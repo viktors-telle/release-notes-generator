@@ -6,10 +6,9 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
-using ReleaseNotesGenerator.Components.Interfaces;
 using ReleaseNotesGenerator.Domain.Commit;
 
-namespace ReleaseNotesGenerator.Components.Implementations.RepositoryHandlers
+namespace ReleaseNotesGenerator.Components.RepositoryHandlers
 {
     public class GitRepositoryHandler : IRepositoryHandler
     {
@@ -30,9 +29,9 @@ namespace ReleaseNotesGenerator.Components.Implementations.RepositoryHandlers
                 { "toDate", query.Until.ToString("s") + "Z" }
             };
 
-            if (!string.IsNullOrEmpty(query.ItemPath))
+            if (!string.IsNullOrEmpty(query.RepositoryPath))
             {
-                queryParameters.Add("itemPath", query.ItemPath);             
+                queryParameters.Add("itemPath", query.RepositoryPath);             
             }       
              
             while (commitCount == 100)

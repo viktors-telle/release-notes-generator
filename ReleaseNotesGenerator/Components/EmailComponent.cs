@@ -3,12 +3,11 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
-using ReleaseNotesGenerator.Components.Interfaces;
 using ReleaseNotesGenerator.Dto;
 using ReleaseNotesGenerator.Dto.Options;
 using ReleaseNotesGenerator.Exceptions;
 
-namespace ReleaseNotesGenerator.Components.Implementations
+namespace ReleaseNotesGenerator.Components
 {
     public class EmailComponent : IEmailComponent
     {

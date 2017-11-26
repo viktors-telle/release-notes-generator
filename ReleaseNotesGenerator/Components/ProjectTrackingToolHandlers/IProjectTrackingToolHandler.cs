@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using ReleaseNotesGenerator.Domain;
 using ReleaseNotesGenerator.Domain.WorkItem;
 
-namespace ReleaseNotesGenerator.Components.Interfaces
+namespace ReleaseNotesGenerator.Components.ProjectTrackingToolHandlers
 {
     public interface IProjectTrackingToolHandler
     {

@@ -3,9 +3,10 @@
     export class CommitQuery {
         
         url: string;
+        owner: string;
         branchName: string;
         repositoryName: string;
-        itemPath: string;
+        repositoryPath: string;
         from: Date;
         until: Date;
         }

@@ -8,6 +8,7 @@ import { EntityBase } from './EntityBase';
         
         name: string;
         url: string;
+        owner: string;
         projectId: number;
         project: Project;
         repositoryType: RepositoryType;

@@ -14,10 +14,8 @@ namespace ReleaseNotesGenerator.Dto
         [Required]
         public string BranchName { get; set; }
 
-        [Required]
         public DateTime From { get; set; }
 
-        [Required]
         public DateTime Until { get; set; }
 
         public string RepositoryPath { get; set; }

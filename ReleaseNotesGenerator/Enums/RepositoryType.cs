@@ -4,6 +4,6 @@ namespace ReleaseNotesGenerator.Enums
     {
         Git = 1,
         Tfs = 2,
-        GitHub
+        GitHub = 3
     }
 }

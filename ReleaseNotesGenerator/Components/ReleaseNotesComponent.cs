@@ -4,9 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using ReleaseNotesGenerator.Components.Implementations.ProjectTrackingToolHandlers;
-using ReleaseNotesGenerator.Components.Implementations.RepositoryHandlers;
-using ReleaseNotesGenerator.Components.Interfaces;
+using ReleaseNotesGenerator.Components.ProjectTrackingToolHandlers;
+using ReleaseNotesGenerator.Components.RepositoryHandlers;
 using ReleaseNotesGenerator.Dal;
 using ReleaseNotesGenerator.Domain;
 using ReleaseNotesGenerator.Domain.Commit;
@@ -14,7 +13,7 @@ using ReleaseNotesGenerator.Dto;
 using ReleaseNotesGenerator.Exceptions;
 using ReleaseNotesGenerator.Extensions;
 
-namespace ReleaseNotesGenerator.Components.Implementations
+namespace ReleaseNotesGenerator.Components
 {
     public class ReleaseNotesComponent : IReleaseNotesComponent
     {
@@ -32,7 +31,7 @@ namespace ReleaseNotesGenerator.Components.Implementations
             var repository = await GetRepository(request);
             using (var transaction = _context.Database.BeginTransaction())
             {
-                var commits = await GetCommits(repository);
+                var commits = await GetCommits(repository, request);
                 var releaseNotes = await GenerateReleaseNotes(commits, repository);
                 await Save(releaseNotes, repository.Id, request);
                 transaction.Commit();
@@ -54,19 +53,24 @@ namespace ReleaseNotesGenerator.Components.Implementations
                 project.Repositories.FirstOrDefault(
                     r => r.Name.Equals(request.RepositoryName, StringComparison.InvariantCultureIgnoreCase));
             if (repository == null)
+            {
                 throw new RepositoryNotFoundException();
+            }                
 
             return repository;
         }
 
-        private async Task<IList<Commit>> GetCommits(Repository repository)
+        private async Task<IList<Commit>> GetCommits(Repository repository, ReleaseNotesRequest request)
         {
             var commitQuery = _mapper.Map<Repository, CommitQuery>(repository);
+            _mapper.Map(request, commitQuery);
             var repositoryHandler = RepositoryFactory<IRepositoryHandler>.Create(repository.RepositoryType);
             var commits = (await repositoryHandler.GetCommits(commitQuery)).ToList();
 
             if (!commits.Any())
+            {
                 throw new CommitsNotFoundException();
+            }                
 
             commits.AddRange(await repositoryHandler.GetCommitsWithFullComments(commitQuery,
                 commits.Where(c => c.CommentTruncated)));
@@ -76,17 +80,19 @@ namespace ReleaseNotesGenerator.Components.Implementations
         }
 
         private async Task<string> GenerateReleaseNotes(IList<Commit> commits, Repository repository)
-        {
+        {                         
+            var projectTrackingTool = repository.ProjectTrackingToolId != default(int?) 
+                ? await _context.ProjectTrackingTools.FindAsync(repository.ProjectTrackingToolId) 
+                : null;
+            if (projectTrackingTool == null)
+            {
+                return commits.Select(c => c.Comment).Aggregate((a, b) => a + Environment.NewLine + b);
+            }
+
             var workItemIds = commits.GetDistinctWorkItemsIdsFromCommits().ToArray();
             if (!workItemIds.Any())
             {
                 throw new RelatedWorkItemsNotFoundException();
-            }                
-
-            var projectTrackingTool = await _context.ProjectTrackingTools.FindAsync(repository.ProjectTrackingToolId);
-            if (projectTrackingTool == null)
-            {
-                return commits.Select(c => c.Comment).Aggregate((a, b) => a + Environment.NewLine + b);
             }
 
             var projectTrackingToolHandler =

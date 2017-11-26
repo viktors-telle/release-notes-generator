@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using ReleaseNotesGenerator.Domain;
 
-namespace ReleaseNotesGenerator.Components.Interfaces
+namespace ReleaseNotesGenerator.Components
 {
     public interface IProjectTrackingToolComponent
     {

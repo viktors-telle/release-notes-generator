@@ -10,10 +10,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using ReleaseNotesGenerator.Components.Implementations;
-using ReleaseNotesGenerator.Components.Implementations.ProjectTrackingToolHandlers;
-using ReleaseNotesGenerator.Components.Implementations.RepositoryHandlers;
-using ReleaseNotesGenerator.Components.Interfaces;
+using ReleaseNotesGenerator.Components;
+using ReleaseNotesGenerator.Components.ProjectTrackingToolHandlers;
+using ReleaseNotesGenerator.Components.RepositoryHandlers;
 using ReleaseNotesGenerator.Dal;
 using ReleaseNotesGenerator.Dto.Options;
 using ReleaseNotesGenerator.Enums;
@@ -50,6 +49,8 @@ namespace ReleaseNotesGenerator
             services.AddDbContext<ReleaseNotesContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("ReleaseNotesGenerator")));
 
+            services.AddSingleton<HttpClientFactory>();
+
             services.AddScoped<IProjectComponent, ProjectComponent>();
             services.AddScoped<IRepositoryComponent, RepositoryComponent>();
             services.AddScoped<IReleaseNotesComponent, ReleaseNotesComponent>();
@@ -59,6 +60,11 @@ namespace ReleaseNotesGenerator
             services.AddScoped<JiraHandler, JiraHandler>();
             services.AddScoped<GitRepositoryHandler, GitRepositoryHandler>();
             services.AddScoped<TfsRepositoryHandler, TfsRepositoryHandler>();
+            
+            //services.AddScoped<GitHubRepositoryHandler>(() => new GitHubRepositoryHandler(() => serviceProvider.GetService<HttpClientFactory>()));
+
+            services.AddScoped(
+                provider => new GitHubRepositoryHandler(provider.GetService<HttpClientFactory>()));
 
             var serviceProvider = services.BuildServiceProvider();
             RepositoryFactory<IRepositoryHandler>.Register(RepositoryType.Git,
@@ -90,7 +96,7 @@ namespace ReleaseNotesGenerator
                 });
             });
 
-            ServicePointManager.DefaultConnectionLimit = 200;
+            ServicePointManager.DefaultConnectionLimit = 200;            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ReleaseNotesGenerator.Components.Interfaces;
+using ReleaseNotesGenerator.Components;
 using ReleaseNotesGenerator.Domain;
 
 namespace ReleaseNotesGenerator.Api

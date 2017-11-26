@@ -12,9 +12,10 @@ using System;
 namespace ReleaseNotesGenerator.Migrations
 {
     [DbContext(typeof(ReleaseNotesContext))]
-    partial class ReleaseNotesContextModelSnapshot : ModelSnapshot
+    [Migration("20171112201322_ChangeProjectTrackingToolIdToOptionalRelationship")]
+    partial class ChangeProjectTrackingToolIdToOptionalRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,9 +117,6 @@ namespace ReleaseNotesGenerator.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(256);
-
-                    b.Property<string>("Owner")
-                        .HasMaxLength(128);
 
                     b.Property<int>("ProjectId");
 

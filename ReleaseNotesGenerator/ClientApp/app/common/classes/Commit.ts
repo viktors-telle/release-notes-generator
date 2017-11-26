@@ -7,6 +7,8 @@
         committer: Author;
         comment: string;
         commentTruncated: boolean;
+        message: string;
+        url: string;
         }
 
     

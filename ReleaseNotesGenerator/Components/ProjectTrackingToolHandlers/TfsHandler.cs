@@ -6,11 +6,10 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
-using ReleaseNotesGenerator.Components.Interfaces;
 using ReleaseNotesGenerator.Domain;
 using ReleaseNotesGenerator.Domain.WorkItem;
 
-namespace ReleaseNotesGenerator.Components.Implementations.ProjectTrackingToolHandlers
+namespace ReleaseNotesGenerator.Components.ProjectTrackingToolHandlers
 {
     public class TfsHandler : IProjectTrackingToolHandler
     {
