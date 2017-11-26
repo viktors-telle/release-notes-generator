@@ -80,17 +80,19 @@ namespace ReleaseNotesGenerator.Components
         }
 
         private async Task<string> GenerateReleaseNotes(IList<Commit> commits, Repository repository)
-        {
+        {                         
+            var projectTrackingTool = repository.ProjectTrackingToolId != default(int?) 
+                ? await _context.ProjectTrackingTools.FindAsync(repository.ProjectTrackingToolId) 
+                : null;
+            if (projectTrackingTool == null)
+            {
+                return commits.Select(c => c.Comment).Aggregate((a, b) => a + Environment.NewLine + b);
+            }
+
             var workItemIds = commits.GetDistinctWorkItemsIdsFromCommits().ToArray();
             if (!workItemIds.Any())
             {
                 throw new RelatedWorkItemsNotFoundException();
-            }                
-
-            var projectTrackingTool = await _context.ProjectTrackingTools.FindAsync(repository.ProjectTrackingToolId);
-            if (projectTrackingTool == null)
-            {
-                return commits.Select(c => c.Comment).Aggregate((a, b) => a + Environment.NewLine + b);
             }
 
             var projectTrackingToolHandler =

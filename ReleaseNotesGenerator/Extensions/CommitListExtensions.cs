@@ -12,6 +12,10 @@ namespace ReleaseNotesGenerator.Extensions
             var relatedWorkItems = new List<string>();
             foreach (var commit in commits)
             {
+                if (string.IsNullOrEmpty(commit.Comment))
+                {
+                    continue;                    
+                }
                 var matches = Regex.Matches(commit.Comment);
                 foreach (Match match in matches)
                 {

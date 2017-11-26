@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
@@ -34,11 +35,14 @@ namespace ReleaseNotesGenerator.Components.RepositoryHandlers
             }
 
             var client = _httpClientFactory.Create(new Uri(query.Url, UriKind.Absolute));
+            client.DefaultRequestHeaders.Add("User-Agent", query.RepositoryName);
             var commitsUrl = QueryHelpers.AddQueryString(
                 new Uri(client.BaseAddress, $"repos/{query.Owner}/{query.RepositoryName}/commits").ToString(), queryParameters);            
             var response = await client.GetAsync(commitsUrl);
             var responseContent = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<IList<Commit>>(responseContent);
+            var commitResponses = JsonConvert.DeserializeObject<IList<GitHubCommitResponse>>(responseContent);
+
+            return commitResponses.Select(cr => cr.Commit).ToList();
         }
 
         public async Task<IEnumerable<Commit>> GetCommitsWithFullComments(CommitQuery query, IEnumerable<Commit> commits)
