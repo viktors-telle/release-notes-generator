@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using ReleaseNotesGenerator.Dal;
 using ReleaseNotesGenerator.Domain;
 
-namespace ReleaseNotesGenerator.Components
+namespace ReleaseNotesGenerator.Features.Projects
 {
     public class ProjectComponent : IProjectComponent
     {

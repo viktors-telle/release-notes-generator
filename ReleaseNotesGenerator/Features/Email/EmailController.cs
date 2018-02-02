@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ReleaseNotesGenerator.Components;
 using ReleaseNotesGenerator.Dto;
 
-namespace ReleaseNotesGenerator.Api
+namespace ReleaseNotesGenerator.Features.Email
 {
     [Route("api/[controller]")]
     public class EmailController : Controller

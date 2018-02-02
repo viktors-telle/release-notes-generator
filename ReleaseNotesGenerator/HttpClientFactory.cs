@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace ReleaseNotesGenerator.Components
+namespace ReleaseNotesGenerator
 {
     public sealed class HttpClientFactory : IDisposable
     {

@@ -4,16 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using ReleaseNotesGenerator.Components.ProjectTrackingToolHandlers;
-using ReleaseNotesGenerator.Components.RepositoryHandlers;
 using ReleaseNotesGenerator.Dal;
 using ReleaseNotesGenerator.Domain;
 using ReleaseNotesGenerator.Domain.Commit;
 using ReleaseNotesGenerator.Dto;
 using ReleaseNotesGenerator.Exceptions;
 using ReleaseNotesGenerator.Extensions;
+using ReleaseNotesGenerator.Features.ReleaseNotes.ProjectTrackingToolHandlers;
+using ReleaseNotesGenerator.Features.ReleaseNotes.RepositoryHandlers;
 
-namespace ReleaseNotesGenerator.Components
+namespace ReleaseNotesGenerator.Features.ReleaseNotes
 {
     public class ReleaseNotesComponent : IReleaseNotesComponent
     {

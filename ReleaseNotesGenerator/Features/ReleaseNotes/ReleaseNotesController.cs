@@ -1,11 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using ReleaseNotesGenerator.Components;
 using ReleaseNotesGenerator.Dto;
 using ReleaseNotesGenerator.Exceptions;
 
-namespace ReleaseNotesGenerator.Api
+namespace ReleaseNotesGenerator.Features.ReleaseNotes
 {
     [Route("api/[controller]")]
     public class ReleaseNotesController : Controller

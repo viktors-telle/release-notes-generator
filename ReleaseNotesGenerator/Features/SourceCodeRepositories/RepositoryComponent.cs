@@ -3,7 +3,7 @@ using AutoMapper;
 using ReleaseNotesGenerator.Dal;
 using ReleaseNotesGenerator.Domain;
 
-namespace ReleaseNotesGenerator.Components
+namespace ReleaseNotesGenerator.Features.SourceCodeRepositories
 {
     public class RepositoryComponent : IRepositoryComponent
     {

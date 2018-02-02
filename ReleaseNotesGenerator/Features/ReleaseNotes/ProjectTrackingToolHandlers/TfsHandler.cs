@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 using ReleaseNotesGenerator.Domain;
 using ReleaseNotesGenerator.Domain.WorkItem;
 
-namespace ReleaseNotesGenerator.Components.ProjectTrackingToolHandlers
+namespace ReleaseNotesGenerator.Features.ReleaseNotes.ProjectTrackingToolHandlers
 {
     public class TfsHandler : IProjectTrackingToolHandler
     {

@@ -7,7 +7,7 @@ using ReleaseNotesGenerator.Dto;
 using ReleaseNotesGenerator.Dto.Options;
 using ReleaseNotesGenerator.Exceptions;
 
-namespace ReleaseNotesGenerator.Components
+namespace ReleaseNotesGenerator.Features.Email
 {
     public class EmailComponent : IEmailComponent
     {

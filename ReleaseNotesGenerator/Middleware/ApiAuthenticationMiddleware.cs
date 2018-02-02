@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using ReleaseNotesGenerator.Components;
+using ReleaseNotesGenerator.Features.Projects;
 
 namespace ReleaseNotesGenerator.Middleware
 {

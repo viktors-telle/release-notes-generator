@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using ReleaseNotesGenerator.Enums;
 
-namespace ReleaseNotesGenerator.Components.RepositoryHandlers
+namespace ReleaseNotesGenerator.Features.ReleaseNotes.RepositoryHandlers
 {
     public class RepositoryFactory<T>
     {

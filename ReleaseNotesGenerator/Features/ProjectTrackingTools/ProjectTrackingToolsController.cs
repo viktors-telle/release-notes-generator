@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ReleaseNotesGenerator.Components;
 using ReleaseNotesGenerator.Domain;
 
-namespace ReleaseNotesGenerator.Api
+namespace ReleaseNotesGenerator.Features.ProjectTrackingTools
 {
     [Route("api/[controller]")]
     public class ProjectTrackingToolsController : Controller

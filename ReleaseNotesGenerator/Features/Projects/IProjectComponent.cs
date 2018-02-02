@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using ReleaseNotesGenerator.Domain;
 
-namespace ReleaseNotesGenerator.Components
+namespace ReleaseNotesGenerator.Features.Projects
 {
     public interface IProjectComponent
     {

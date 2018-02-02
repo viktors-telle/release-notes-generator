@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using ReleaseNotesGenerator.Enums;
 
-namespace ReleaseNotesGenerator.Components.ProjectTrackingToolHandlers
+namespace ReleaseNotesGenerator.Features.ReleaseNotes.ProjectTrackingToolHandlers
 {
     public class ProjectTrackingToolFactory<T>
     {

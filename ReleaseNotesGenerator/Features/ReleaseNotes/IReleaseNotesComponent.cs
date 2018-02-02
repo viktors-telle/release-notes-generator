@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using ReleaseNotesGenerator.Dto;
 
-namespace ReleaseNotesGenerator.Components
+namespace ReleaseNotesGenerator.Features.ReleaseNotes
 {
     public interface IReleaseNotesComponent
     {

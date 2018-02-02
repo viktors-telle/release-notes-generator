@@ -2,10 +2,9 @@
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ReleaseNotesGenerator.Components;
 using ReleaseNotesGenerator.Domain;
 
-namespace ReleaseNotesGenerator.Api
+namespace ReleaseNotesGenerator.Features.Projects
 {
     [Route("api/[controller]")]
     public class ProjectsController : Controller

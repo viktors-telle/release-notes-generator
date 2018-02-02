@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using ReleaseNotesGenerator.Domain;
 
-namespace ReleaseNotesGenerator.Components
+namespace ReleaseNotesGenerator.Features.SourceCodeRepositories
 {
     public interface IRepositoryComponent
     {

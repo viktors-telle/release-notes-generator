@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ReleaseNotesGenerator.Components;
+using ReleaseNotesGenerator.Api;
 using ReleaseNotesGenerator.Domain;
 
-namespace ReleaseNotesGenerator.Api
+namespace ReleaseNotesGenerator.Features.SourceCodeRepositories
 {
     [Route("api/[controller]")]
     public class RepositoriesController : BaseController
