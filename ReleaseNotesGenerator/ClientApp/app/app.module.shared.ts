@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
-import { AppComponent } from './components/app/app.component';
-import { NavMenuComponent } from './components/navmenu/navmenu.component';
-import { HomeComponent } from './components/home/home.component';
-import { ProjectsComponent } from './components/project/projects.component';
-import { ProjectEditComponent } from './components/project/project.edit.component';
+import { ProjectsComponent } from './components/project/projects';
+import { ProjectEditComponent } from './components/project/project-edit';
+import { AppComponent } from './components/app/app';
+import { NavMenuComponent } from './components/navmenu/navmenu';
+import { HomeComponent } from './components/home/home';
 
 @NgModule({
     declarations: [

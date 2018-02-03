@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { AppModuleShared } from './app.module.shared';
-import { AppComponent } from './components/app/app.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { ProjectService } from './services/projectservice';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ExceptionInterceptor } from './common/exception.interceptor';
+import { AppComponent } from './components/app/app';
+import { ProjectService } from './services/projects-service';
+import { ExceptionInterceptor } from './common/exception-interceptor';
 
 @NgModule({
     bootstrap: [ AppComponent ],

@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from '../../services/projectservice';
 import { Project } from '../../common/classes/project';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Repository } from '../../common/classes/Repository';
+import { ProjectService } from '../../services/projects-service';
 
 @Component({
     selector: 'project-edit',
-    templateUrl: './project.edit.component.html',
-    styleUrls: ['./project.edit.component.css'],
-    providers: [ProjectService]
+    templateUrl: './project-edit.html',
+    styleUrls: ['./project-edit.css'],
+    providers: []
 })
 export class ProjectEditComponent implements OnInit {
     project: Project = {
