@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using ReleaseNotesGenerator.Dto;
 using ReleaseNotesGenerator.Features.Email;
 using ReleaseNotesGenerator.Features.Projects;
 using ReleaseNotesGenerator.Features.ProjectTrackingTools;

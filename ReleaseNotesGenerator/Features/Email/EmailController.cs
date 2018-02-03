@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ReleaseNotesGenerator.Dto;
 
 namespace ReleaseNotesGenerator.Features.Email
 {

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using ReleaseNotesGenerator.Dal;
-using ReleaseNotesGenerator.Dto;
 using ReleaseNotesGenerator.Exceptions;
 using ReleaseNotesGenerator.Extensions;
 using ReleaseNotesGenerator.Features.ReleaseNotes.Commit;

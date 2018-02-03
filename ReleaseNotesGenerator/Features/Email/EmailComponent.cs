@@ -3,7 +3,6 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
-using ReleaseNotesGenerator.Dto;
 using ReleaseNotesGenerator.Dto.Options;
 using ReleaseNotesGenerator.Exceptions;
 
