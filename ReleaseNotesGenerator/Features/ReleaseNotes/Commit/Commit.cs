@@ -1,4 +1,4 @@
-﻿namespace ReleaseNotesGenerator.Domain.Commit
+﻿namespace ReleaseNotesGenerator.Features.ReleaseNotes.Commit
 {
     public class Commit
     {

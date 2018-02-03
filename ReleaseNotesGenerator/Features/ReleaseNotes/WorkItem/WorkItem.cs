@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace ReleaseNotesGenerator.Domain.WorkItem
+namespace ReleaseNotesGenerator.Features.ReleaseNotes.WorkItem
 {
     public class WorkItem
     {

@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ReleaseNotesGenerator.Domain.Commit;
+using ReleaseNotesGenerator.Features.ReleaseNotes.Commit;
 
 namespace ReleaseNotesGenerator.Features.ReleaseNotes.RepositoryHandlers
 {
     public class TfsRepositoryHandler : IRepositoryHandler
     {
-        public Task<IList<Commit>> GetCommits(CommitQuery query)
+        public Task<IList<Commit.Commit>> GetCommits(CommitQuery query)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<Commit>> GetCommitsWithFullComments(CommitQuery query, IEnumerable<Commit> commits)
+        public Task<IEnumerable<Commit.Commit>> GetCommitsWithFullComments(CommitQuery query, IEnumerable<Commit.Commit> commits)
         {
             throw new System.NotImplementedException();
         }

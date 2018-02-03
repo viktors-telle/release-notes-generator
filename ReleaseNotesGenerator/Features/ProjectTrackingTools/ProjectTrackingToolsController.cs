@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ReleaseNotesGenerator.Domain;
 
 namespace ReleaseNotesGenerator.Features.ProjectTrackingTools
 {

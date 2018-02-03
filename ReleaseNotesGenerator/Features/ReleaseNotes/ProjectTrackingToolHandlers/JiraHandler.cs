@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ReleaseNotesGenerator.Domain;
-using ReleaseNotesGenerator.Domain.WorkItem;
+using ReleaseNotesGenerator.Features.ProjectTrackingTools;
 
 namespace ReleaseNotesGenerator.Features.ReleaseNotes.ProjectTrackingToolHandlers
 {
     public class JiraHandler : IProjectTrackingToolHandler
     {
-        public Task<IList<WorkItem>> GetWorkItems(ProjectTrackingTool projectTrackingTool, string[] workItemIds)
+        public Task<IList<WorkItem.WorkItem>> GetWorkItems(ProjectTrackingTool projectTrackingTool, string[] workItemIds)
         {
             throw new NotImplementedException();
         }
 
-        public string CreateLinksToWorkItems(ProjectTrackingTool projectTrackingTool, IEnumerable<WorkItem> workItems)
+        public string CreateLinksToWorkItems(ProjectTrackingTool projectTrackingTool, IEnumerable<WorkItem.WorkItem> workItems)
         {
             throw new NotImplementedException();
         }

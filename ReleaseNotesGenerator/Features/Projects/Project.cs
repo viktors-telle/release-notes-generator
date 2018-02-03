@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using ReleaseNotesGenerator.Features.SourceCodeRepositories;
 
-namespace ReleaseNotesGenerator.Domain
+namespace ReleaseNotesGenerator.Features.Projects
 {
     public class Project : EntityBase<int>
     {

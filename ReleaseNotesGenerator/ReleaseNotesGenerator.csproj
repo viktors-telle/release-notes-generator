@@ -39,7 +39,6 @@
   <ItemGroup>
     <Folder Include="ClientApp\app\services\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
 
   <ItemGroup>

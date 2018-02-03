@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ReleaseNotesGenerator.Domain;
 
 namespace ReleaseNotesGenerator.Features.Projects
 {

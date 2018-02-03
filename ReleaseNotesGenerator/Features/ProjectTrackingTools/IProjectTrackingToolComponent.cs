@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using ReleaseNotesGenerator.Domain;
 
 namespace ReleaseNotesGenerator.Features.ProjectTrackingTools
 {

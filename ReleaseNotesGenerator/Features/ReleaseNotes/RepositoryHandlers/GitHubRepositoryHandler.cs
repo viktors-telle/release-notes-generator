@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
-using ReleaseNotesGenerator.Domain.Commit;
+using ReleaseNotesGenerator.Features.ReleaseNotes.Commit;
 
 namespace ReleaseNotesGenerator.Features.ReleaseNotes.RepositoryHandlers
 {
@@ -17,7 +17,7 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes.RepositoryHandlers
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IList<Commit>> GetCommits(CommitQuery query)
+        public async Task<IList<Commit.Commit>> GetCommits(CommitQuery query)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -45,9 +45,9 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes.RepositoryHandlers
             return commitResponses.Select(cr => cr.Commit).ToList();
         }
 
-        public async Task<IEnumerable<Commit>> GetCommitsWithFullComments(CommitQuery query, IEnumerable<Commit> commits)
+        public async Task<IEnumerable<Commit.Commit>> GetCommitsWithFullComments(CommitQuery query, IEnumerable<Commit.Commit> commits)
         {
-            return await Task.FromResult(new List<Commit>());
+            return await Task.FromResult(new List<Commit.Commit>());
         }
     }
 }

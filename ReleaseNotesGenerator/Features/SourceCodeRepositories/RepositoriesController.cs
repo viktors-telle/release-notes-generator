@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ReleaseNotesGenerator.Api;
-using ReleaseNotesGenerator.Domain;
 
 namespace ReleaseNotesGenerator.Features.SourceCodeRepositories
 {

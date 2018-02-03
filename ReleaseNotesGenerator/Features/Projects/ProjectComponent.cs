@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using ReleaseNotesGenerator.Dal;
-using ReleaseNotesGenerator.Domain;
 
 namespace ReleaseNotesGenerator.Features.Projects
 {

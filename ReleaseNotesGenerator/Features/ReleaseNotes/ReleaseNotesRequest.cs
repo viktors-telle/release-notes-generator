@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ReleaseNotesGenerator.Dto
+namespace ReleaseNotesGenerator.Features.ReleaseNotes
 {
     public class ReleaseNotesRequest
     {

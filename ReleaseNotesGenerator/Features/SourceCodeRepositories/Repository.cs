@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ReleaseNotesGenerator.Enums;
+using ReleaseNotesGenerator.Features.Projects;
+using ReleaseNotesGenerator.Features.ProjectTrackingTools;
+using ReleaseNotesGenerator.Features.ReleaseNotes;
 
-namespace ReleaseNotesGenerator.Domain
+namespace ReleaseNotesGenerator.Features.SourceCodeRepositories
 {
     public class Repository : EntityBase<int>
     {

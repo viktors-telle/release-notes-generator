@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using ReleaseNotesGenerator.Dal;
-using ReleaseNotesGenerator.Domain;
-using ReleaseNotesGenerator.Domain.Commit;
 using ReleaseNotesGenerator.Dto;
 using ReleaseNotesGenerator.Exceptions;
 using ReleaseNotesGenerator.Extensions;
+using ReleaseNotesGenerator.Features.ReleaseNotes.Commit;
 using ReleaseNotesGenerator.Features.ReleaseNotes.ProjectTrackingToolHandlers;
 using ReleaseNotesGenerator.Features.ReleaseNotes.RepositoryHandlers;
+using ReleaseNotesGenerator.Features.SourceCodeRepositories;
 
 namespace ReleaseNotesGenerator.Features.ReleaseNotes
 {
@@ -60,7 +60,7 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes
             return repository;
         }
 
-        private async Task<IList<Commit>> GetCommits(Repository repository, ReleaseNotesRequest request)
+        private async Task<IList<Commit.Commit>> GetCommits(Repository repository, ReleaseNotesRequest request)
         {
             var commitQuery = _mapper.Map<Repository, CommitQuery>(repository);
             _mapper.Map(request, commitQuery);
@@ -79,7 +79,7 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes
             return commits;
         }
 
-        private async Task<string> GenerateReleaseNotes(IList<Commit> commits, Repository repository)
+        private async Task<string> GenerateReleaseNotes(IList<Commit.Commit> commits, Repository repository)
         {                         
             var projectTrackingTool = repository.ProjectTrackingToolId != default(int?) 
                 ? await _context.ProjectTrackingTools.FindAsync(repository.ProjectTrackingToolId) 

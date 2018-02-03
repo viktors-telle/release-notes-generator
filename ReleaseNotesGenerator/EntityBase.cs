@@ -1,4 +1,4 @@
-﻿namespace ReleaseNotesGenerator.Domain
+﻿namespace ReleaseNotesGenerator
 {
     public class EntityBase<T> where T : struct
     {

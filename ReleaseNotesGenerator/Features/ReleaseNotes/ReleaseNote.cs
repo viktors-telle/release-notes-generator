@@ -1,6 +1,7 @@
 ﻿using System;
+using ReleaseNotesGenerator.Features.SourceCodeRepositories;
 
-namespace ReleaseNotesGenerator.Domain
+namespace ReleaseNotesGenerator.Features.ReleaseNotes
 {
     public class ReleaseNote : EntityBase<int>
     {

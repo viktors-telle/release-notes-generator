@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
 using ReleaseNotesGenerator.Dal;
-using ReleaseNotesGenerator.Domain;
 
 namespace ReleaseNotesGenerator.Features.ProjectTrackingTools
 {

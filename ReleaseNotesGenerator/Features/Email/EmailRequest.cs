@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ReleaseNotesGenerator.Dto
+namespace ReleaseNotesGenerator.Features.Email
 {
     public class EmailRequest
     {

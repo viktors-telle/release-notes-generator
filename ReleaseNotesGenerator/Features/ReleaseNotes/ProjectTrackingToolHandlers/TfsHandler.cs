@@ -6,8 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
-using ReleaseNotesGenerator.Domain;
-using ReleaseNotesGenerator.Domain.WorkItem;
+using ReleaseNotesGenerator.Features.ProjectTrackingTools;
 
 namespace ReleaseNotesGenerator.Features.ReleaseNotes.ProjectTrackingToolHandlers
 {
@@ -15,7 +14,7 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes.ProjectTrackingToolHandler
     {
         private const string WorkItemLinkSeparator = "<br />";
 
-        public async Task<IList<WorkItem>> GetWorkItems(ProjectTrackingTool projectTrackingTool,
+        public async Task<IList<WorkItem.WorkItem>> GetWorkItems(ProjectTrackingTool projectTrackingTool,
             string[] workItemIds)
         {
             var queryParameters = new Dictionary<string, string>
@@ -41,7 +40,7 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes.ProjectTrackingToolHandler
             }
         }
 
-        private async Task<WorkItem> GetWorkItem(string id, string projectTrackingToolUrl, HttpClient httpClient, IDictionary<string, string> queryParameters)
+        private async Task<WorkItem.WorkItem> GetWorkItem(string id, string projectTrackingToolUrl, HttpClient httpClient, IDictionary<string, string> queryParameters)
         {
             var workItemUrl =
                 QueryHelpers.AddQueryString(
@@ -52,14 +51,14 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes.ProjectTrackingToolHandler
             if (response.IsSuccessStatusCode)
             {
                 var responseContent = await response.Content.ReadAsStringAsync();
-                var workItemResponse = JsonConvert.DeserializeObject<WorkItem>(responseContent);
+                var workItemResponse = JsonConvert.DeserializeObject<WorkItem.WorkItem>(responseContent);
                 return workItemResponse;
             }
 
             return null;
         }
 
-        public string CreateLinksToWorkItems(ProjectTrackingTool projectTrackingTool, IEnumerable<WorkItem> workItems)
+        public string CreateLinksToWorkItems(ProjectTrackingTool projectTrackingTool, IEnumerable<WorkItem.WorkItem> workItems)
         {
             var links = new List<string>();
             foreach (var workItem in workItems)

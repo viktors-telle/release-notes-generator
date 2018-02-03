@@ -1,7 +1,11 @@
 ﻿using AutoMapper;
-using ReleaseNotesGenerator.Domain;
-using ReleaseNotesGenerator.Domain.Commit;
 using ReleaseNotesGenerator.Dto;
+using ReleaseNotesGenerator.Features.Email;
+using ReleaseNotesGenerator.Features.Projects;
+using ReleaseNotesGenerator.Features.ProjectTrackingTools;
+using ReleaseNotesGenerator.Features.ReleaseNotes;
+using ReleaseNotesGenerator.Features.ReleaseNotes.Commit;
+using ReleaseNotesGenerator.Features.SourceCodeRepositories;
 
 namespace ReleaseNotesGenerator.Mappings
 {
