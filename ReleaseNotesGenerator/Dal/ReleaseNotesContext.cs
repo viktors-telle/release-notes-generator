@@ -2,7 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ReleaseNotesGenerator.Dal.Extensions;
-using ReleaseNotesGenerator.Domain;
+using ReleaseNotesGenerator.Features.Projects;
+using ReleaseNotesGenerator.Features.ProjectTrackingTools;
+using ReleaseNotesGenerator.Features.ReleaseNotes;
+using ReleaseNotesGenerator.Features.SourceCodeRepositories;
 
 namespace ReleaseNotesGenerator.Dal
 {

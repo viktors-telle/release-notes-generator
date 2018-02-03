@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
-using ReleaseNotesGenerator.Domain;
-using ReleaseNotesGenerator.Domain.Commit;
-using ReleaseNotesGenerator.Dto;
+using ReleaseNotesGenerator.Features.Email;
+using ReleaseNotesGenerator.Features.Projects;
+using ReleaseNotesGenerator.Features.ProjectTrackingTools;
+using ReleaseNotesGenerator.Features.ReleaseNotes;
+using ReleaseNotesGenerator.Features.ReleaseNotes.Commit;
+using ReleaseNotesGenerator.Features.SourceCodeRepositories;
 
 namespace ReleaseNotesGenerator.Mappings
 {
@@ -10,22 +13,35 @@ namespace ReleaseNotesGenerator.Mappings
         public MappingProfile()
         {
             CreateMap<Repository, CommitQuery>()
-                .ForMember(src => src.RepositoryName, dest => dest.MapFrom(r => r.Name));
+                .ForMember(dest => dest.RepositoryName, src => src.MapFrom(r => r.Name))
+                .ForMember(dest => dest.BranchName, src => src.Ignore())
+                .ForMember(dest => dest.RepositoryPath, src => src.Ignore())
+                .ForMember(dest => dest.From, src => src.Ignore())
+                .ForMember(dest => dest.Until, src => src.Ignore());
 
-            CreateMap<EmailRequest, ReleaseNotesRequest>();
+            CreateMap<EmailRequest, ReleaseNotesRequest>()
+                .ForMember(dest => dest.Until, src => src.Ignore())
+                .ForMember(dest => dest.RepositoryPath, src => src.Ignore());
 
             CreateMap<Repository, Repository>()
-                .ForMember(src => src.Id, dest => dest.Ignore());
+                .ForMember(dest => dest.Id, src => src.Ignore());
 
             CreateMap<Project, Project>()
-                .ForMember(src => src.Id, dest => dest.Ignore());
+                .ForMember(dest => dest.Id, src => src.Ignore());
 
             CreateMap<ProjectTrackingTool, ProjectTrackingTool>()
-                .ForMember(src => src.Id, dest => dest.Ignore());
+                .ForMember(dest => dest.Id, src => src.Ignore());
 
-            CreateMap<ReleaseNotesRequest, ReleaseNote>();
+            CreateMap<ReleaseNotesRequest, ReleaseNote>()
+                .ForMember(dest => dest.Notes, src => src.Ignore())
+                .ForMember(dest => dest.Created, src => src.Ignore())
+                .ForMember(dest => dest.RepositoryId, src => src.Ignore())
+                .ForMember(dest => dest.Repository, src => src.Ignore())
+                .ForMember(dest => dest.Id, src => src.Ignore());
 
-            CreateMap<ReleaseNotesRequest, CommitQuery>();
+            CreateMap<ReleaseNotesRequest, CommitQuery>()
+                .ForMember(dest => dest.Url, src => src.Ignore())
+                .ForMember(dest => dest.Owner, src => src.Ignore());
         }
     }
 }

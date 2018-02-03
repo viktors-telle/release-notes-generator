@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ReleaseNotesGenerator.Domain;
+using ReleaseNotesGenerator.Features.ProjectTrackingTools;
 
 namespace ReleaseNotesGenerator.Dal.Configurations
 {

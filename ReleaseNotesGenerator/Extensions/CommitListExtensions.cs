@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using ReleaseNotesGenerator.Features.ReleaseNotes.Commit;
 
 namespace ReleaseNotesGenerator.Extensions
 {
@@ -7,7 +8,7 @@ namespace ReleaseNotesGenerator.Extensions
     {
         private static readonly Regex Regex = new Regex(@"(?<=#)\d+", RegexOptions.Compiled);
 
-        public static IEnumerable<string> GetDistinctWorkItemsIdsFromCommits(this IEnumerable<Domain.Commit.Commit> commits)
+        public static IEnumerable<string> GetDistinctWorkItemsIdsFromCommits(this IEnumerable<Commit> commits)
         {
             var relatedWorkItems = new List<string>();
             foreach (var commit in commits)
