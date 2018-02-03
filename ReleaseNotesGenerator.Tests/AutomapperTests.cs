@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using ReleaseNotesGenerator.Mappings;
 
 namespace ReleaseNotesGenerator.Tests
@@ -8,8 +7,11 @@ namespace ReleaseNotesGenerator.Tests
     [TestFixture]
     public class AutomapperTests
     {
+        [Test]
         public void AssertMappingConfigurationsAreValid()
-        {
+        {                       
+            Mapper.Initialize(m => m.AddProfile(new MappingProfile()));
+            Mapper.AssertConfigurationIsValid();            
         }
     }
 }
