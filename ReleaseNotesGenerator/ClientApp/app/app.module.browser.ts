@@ -3,8 +3,9 @@ import { AppModuleShared } from './app.module.shared';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './components/app/app';
-import { ProjectService } from './services/projects-service';
 import { ExceptionInterceptor } from './common/exception-interceptor';
+import { ProjectService } from './services/project-service';
+import { RepositoryService } from './services/repository-service';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -15,6 +16,7 @@ import { ExceptionInterceptor } from './common/exception-interceptor';
     providers: [
          { provide: 'BASE_URL', useFactory: getBaseUrl },
          ProjectService,
+         RepositoryService,
          { provide: HTTP_INTERCEPTORS, useClass: ExceptionInterceptor, multi: true }
     ]
 })

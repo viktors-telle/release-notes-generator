@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using ReleaseNotesGenerator.Dal;
 
 namespace ReleaseNotesGenerator.Features.SourceCodeRepositories
@@ -13,6 +15,11 @@ namespace ReleaseNotesGenerator.Features.SourceCodeRepositories
         {
             _context = context;
             _mapper = mapper;
+        }
+
+        public async Task<IEnumerable<Repository>> GetRepositories()
+        {
+            return await _context.Repositories.ToListAsync();
         }
 
         public async Task<Repository> GetById(int id)

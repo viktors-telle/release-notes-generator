@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Repository } from '../../common/classes/Repository';
-import { ProjectService } from '../../services/projects-service';
+import { ProjectService } from '../../services/project-service';
 
 @Component({
     selector: 'project-edit',

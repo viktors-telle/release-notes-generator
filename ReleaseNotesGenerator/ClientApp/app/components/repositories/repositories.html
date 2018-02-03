@@ -1,0 +1,26 @@
+<h2>Repositories</h2>
+<div class="margin-top-10 margin-bottom-10">
+    <a class="btn btn-info" [routerLink]="['/repositories', '0']">Add New Repository</a>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Repository name</th>
+                <th>Repository type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let repository of repositories | async">
+                <td>
+                    <a [routerLink]="['/repositories', repository.id]">{{repository.name}}</a>
+                </td>
+                <td>{{repository.repositoryType}}</td>
+            </tr>
+            <tr *ngIf="(repositories | async)?.length === 0">
+                <td>&nbsp;</td>
+                <td colspan="2">No Records Found</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

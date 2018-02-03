@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ReleaseNotesGenerator.Features.SourceCodeRepositories
@@ -9,5 +10,7 @@ namespace ReleaseNotesGenerator.Features.SourceCodeRepositories
         Task<int> Add(Repository repository);
 
         Task<Repository> Update(int id, Repository repository);
+
+        Task<IEnumerable<Repository>> GetRepositories();
     }
 }

@@ -3,9 +3,10 @@ import { ServerModule } from '@angular/platform-server';
 import { AppModuleShared } from './app.module.shared';
 import { AppComponent } from './components/app/app';
 import { getBaseUrl } from './app.module.browser';
-import { ProjectService } from './services/projects-service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ExceptionInterceptor } from './common/exception-interceptor';
+import { ProjectService } from './services/project-service';
+import { RepositoryService } from './services/repository-service';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -14,7 +15,8 @@ import { ExceptionInterceptor } from './common/exception-interceptor';
         AppModuleShared
     ],
     providers: [
-        ProjectService
+        ProjectService,
+        RepositoryService
    ]
 })
 export class AppModule {

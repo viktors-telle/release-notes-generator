@@ -8,6 +8,7 @@ import { ProjectEditComponent } from './components/project/project-edit';
 import { AppComponent } from './components/app/app';
 import { NavMenuComponent } from './components/navmenu/navmenu';
 import { HomeComponent } from './components/home/home';
+import { RepositoriesComponent } from './components/repositories/repositories';
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import { HomeComponent } from './components/home/home';
         NavMenuComponent,
         HomeComponent,
         ProjectsComponent,
-        ProjectEditComponent
+        ProjectEditComponent,
+        RepositoriesComponent
     ],
     imports: [
         CommonModule,
@@ -27,6 +29,7 @@ import { HomeComponent } from './components/home/home';
             { path: 'home', component: HomeComponent },
             { path: 'projects', component: ProjectsComponent },
             { path: 'projects/:id', component: ProjectEditComponent},
+            { path: 'repositories', component: RepositoriesComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]
