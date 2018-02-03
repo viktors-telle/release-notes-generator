@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ReleaseNotesGenerator.Api;
 
@@ -13,7 +15,15 @@ namespace ReleaseNotesGenerator.Features.SourceCodeRepositories
         {
             _repositoryComponent = projectComponent;
         }
-       
+
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<Repository>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetProjects()
+        {
+            var repositories = await _repositoryComponent.GetRepositories();
+            return Ok(repositories);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
