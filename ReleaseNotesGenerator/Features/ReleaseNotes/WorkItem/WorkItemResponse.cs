@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ReleaseNotesGenerator.Domain.WorkItem
+namespace ReleaseNotesGenerator.Features.ReleaseNotes.WorkItem
 {
     public class WorkItemResponse
     {
