@@ -8,6 +8,8 @@
             <tr>
                 <th>Repository name</th>
                 <th>Repository type</th>
+                <th>URL</th>
+                <th>Owner</th>
             </tr>
         </thead>
         <tbody>
@@ -16,6 +18,10 @@
                     <a [routerLink]="['/repositories', repository.id]">{{repository.name}}</a>
                 </td>
                 <td>{{repository.repositoryType}}</td>
+                <td>
+                    <a href="{{repository.url}}" target="_blank">{{repository.url}}</a>
+                </td>
+                <td>{{repository.owner}}</td>
             </tr>
             <tr *ngIf="(repositories | async)?.length === 0">
                 <td>&nbsp;</td>

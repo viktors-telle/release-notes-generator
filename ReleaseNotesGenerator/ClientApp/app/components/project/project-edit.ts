@@ -66,7 +66,6 @@ export class ProjectEditComponent implements OnInit {
         if (value.id) {
             this.projectService.updateProject(value).subscribe((project: Project) => {
                 this.router.navigate(["projects"]);
-                console.log("Project updated!")
             },
             (err: any) => {
                 console.log(err);
@@ -75,7 +74,6 @@ export class ProjectEditComponent implements OnInit {
         } else {
             this.projectService.insertProject(value).subscribe((project: Project) => {
                 this.router.navigate(["projects"]);
-                console.log("Project inserted!")
             },
             (err: any) => {
                 console.log(err);

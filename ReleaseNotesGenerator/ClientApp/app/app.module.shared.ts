@@ -9,6 +9,7 @@ import { AppComponent } from './components/app/app';
 import { NavMenuComponent } from './components/navmenu/navmenu';
 import { HomeComponent } from './components/home/home';
 import { RepositoriesComponent } from './components/repositories/repositories';
+import { RepositoryEditComponent } from './components/repositories/repository-edit';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { RepositoriesComponent } from './components/repositories/repositories';
         HomeComponent,
         ProjectsComponent,
         ProjectEditComponent,
-        RepositoriesComponent
+        RepositoriesComponent,
+        RepositoryEditComponent
     ],
     imports: [
         CommonModule,
@@ -30,6 +32,7 @@ import { RepositoriesComponent } from './components/repositories/repositories';
             { path: 'projects', component: ProjectsComponent },
             { path: 'projects/:id', component: ProjectEditComponent},
             { path: 'repositories', component: RepositoriesComponent },
+            { path: 'repositories/:id', component: RepositoryEditComponent},
             { path: '**', redirectTo: 'home' }
         ])
     ]

@@ -1,0 +1,48 @@
+<div>
+    <header>
+        <h3>
+            {{ repository.name }}
+        </h3>
+    </header>
+    <br />
+    <form [formGroup]="repositoryForm" *ngIf="formIsLoaded" (ngSubmit)="submit(repositoryForm)" class="editForm" novalidate>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" formControlName="name" />
+            <div class="alert alert-danger" [hidden]="repositoryForm.controls.name.untouched || repositoryForm.controls.name.valid">Name is required</div>
+        </div>
+        <div class="form-group">
+            <label>Type</label>
+            <select class="form-control" formControlName="repositoryType">
+                <option *ngFor="let key of keys" [value]="key" [label]="repositoryTypes[key]"></option>
+            </select>
+            <div class="alert alert-danger" [hidden]="repositoryForm.controls.repositoryType.untouched || repositoryForm.controls.repositoryType.valid">Repository type is required</div>
+        </div>
+        <div class="form-group">
+            <label>Project</label>
+            <select class="form-control" formControlName="projectId">
+                <option *ngFor="let project of projects | async" [value]="project.id" [label]="project.name"></option>
+            </select>
+            <div class="alert alert-danger" [hidden]="repositoryForm.controls.projectId.untouched || repositoryForm.controls.projectId.valid">Project is required</div>
+        </div>
+        <div class="form-group">
+            <label>URL</label>
+            <input type="text" class="form-control" formControlName="url">
+            <div class="alert alert-danger" [hidden]="repositoryForm.controls.url.untouched || repositoryForm.controls.url.valid">URL is required</div>
+        </div>
+        <div class="form-group">
+            <label>Owner</label>
+            <input type="text" class="form-control" formControlName="owner">
+        </div>
+        <br />
+
+        <div *ngIf="repository">
+            <div class="pull-left">
+                <button type="submit" class="btn btn-success" [disabled]="!repositoryForm.valid">Save</button>
+                <button class="btn btn-default" (click)="cancel($event)">Cancel</button>&nbsp;&nbsp;
+            </div>
+        </div>
+        <br />
+        <br />
+    </form>
+</div>
