@@ -12,7 +12,7 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes.RepositoryHandlers
 {
     public class GitRepositoryHandler : IRepositoryHandler
     {
-        public async Task<IList<Commit.Commit>> GetCommits(CommitQuery query)
+        public async Task<List<Commit.Commit>> GetCommits(CommitQuery query)
         {
             const int top = 100;
             var commits = new List<Commit.Commit>();

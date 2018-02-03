@@ -6,7 +6,7 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes.RepositoryHandlers
 {
     public interface IRepositoryHandler
     {
-        Task<IList<Commit.Commit>> GetCommits(CommitQuery query);
+        Task<List<Commit.Commit>> GetCommits(CommitQuery query);
 
         Task<IEnumerable<Commit.Commit>> GetCommitsWithFullComments(CommitQuery query, IEnumerable<Commit.Commit> commits);
     }

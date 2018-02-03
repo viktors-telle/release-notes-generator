@@ -6,7 +6,7 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes.RepositoryHandlers
 {
     public class TfsRepositoryHandler : IRepositoryHandler
     {
-        public Task<IList<Commit.Commit>> GetCommits(CommitQuery query)
+        public Task<List<Commit.Commit>> GetCommits(CommitQuery query)
         {
             throw new System.NotImplementedException();
         }

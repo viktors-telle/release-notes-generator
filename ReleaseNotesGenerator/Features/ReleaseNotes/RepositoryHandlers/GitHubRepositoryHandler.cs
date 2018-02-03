@@ -17,7 +17,7 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes.RepositoryHandlers
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IList<Commit.Commit>> GetCommits(CommitQuery query)
+        public async Task<List<Commit.Commit>> GetCommits(CommitQuery query)
         {
             var queryParameters = new Dictionary<string, string>
             {
@@ -39,9 +39,13 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes.RepositoryHandlers
             var commitsUrl = QueryHelpers.AddQueryString(
                 new Uri(client.BaseAddress, $"repos/{query.Owner}/{query.RepositoryName}/commits").ToString(), queryParameters);            
             var response = await client.GetAsync(commitsUrl);
-            var responseContent = await response.Content.ReadAsStringAsync();
-            var commitResponses = JsonConvert.DeserializeObject<IList<GitHubCommitResponse>>(responseContent);
+            if (!response.IsSuccessStatusCode)
+            {
+                return new List<Commit.Commit>();
+            }
 
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var commitResponses = JsonConvert.DeserializeObject<List<GitHubCommitResponse>>(responseContent);
             return commitResponses.Select(cr => cr.Commit).ToList();
         }
 
