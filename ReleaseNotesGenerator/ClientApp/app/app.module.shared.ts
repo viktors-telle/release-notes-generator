@@ -10,6 +10,8 @@ import { NavMenuComponent } from './components/navmenu/navmenu';
 import { HomeComponent } from './components/home/home';
 import { RepositoriesComponent } from './components/repositories/repositories';
 import { RepositoryEditComponent } from './components/repositories/repository-edit';
+import { ReleaseNotesComponent } from './components/release-notes/release-notes';
+import { FilterPipe } from './common/pipes/filter-pipe';
 
 @NgModule({
     declarations: [
@@ -19,7 +21,9 @@ import { RepositoryEditComponent } from './components/repositories/repository-ed
         ProjectsComponent,
         ProjectEditComponent,
         RepositoriesComponent,
-        RepositoryEditComponent
+        RepositoryEditComponent,
+        ReleaseNotesComponent,
+        FilterPipe
     ],
     imports: [
         CommonModule,
@@ -29,10 +33,11 @@ import { RepositoryEditComponent } from './components/repositories/repository-ed
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'projects', component: ProjectsComponent },
+            { path: 'projects', component: ProjectsComponent },            
             { path: 'projects/:id', component: ProjectEditComponent},
             { path: 'repositories', component: RepositoriesComponent },
             { path: 'repositories/:id', component: RepositoryEditComponent},
+            { path: 'release-notes', component: ReleaseNotesComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

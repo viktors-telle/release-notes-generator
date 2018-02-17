@@ -10,10 +10,25 @@
                 <th>Repository type</th>
                 <th>URL</th>
                 <th>Owner</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let repository of repositories | async">
+                <!-- <td>
+                    <span (click)="getReleaseNotes(repository)">+</span>
+                    <div *ngIf="repository.showReleaseNotes" class="table-responsive">
+                        <table class="table table-striped">
+                            <tr *ngFor="let repositoryReleaseNote of repositoryReleaseNotes | filter:{repositoryId: repository.id}">
+                                <td colspan="4">
+                                    <tr *ngFor="let releaseNote of repositoryReleaseNote.releaseNotes">
+                                        <td colspan="4">{{releaseNote.notes}}</td>
+                                    </tr>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td> -->
                 <td>
                     <a [routerLink]="['/repositories', repository.id]">{{repository.name}}</a>
                 </td>
@@ -22,6 +37,7 @@
                     <a href="{{repository.url}}" target="_blank">{{repository.url}}</a>
                 </td>
                 <td>{{repository.owner}}</td>
+                <td>Show release notes</td>
             </tr>
             <tr *ngIf="(repositories | async)?.length === 0">
                 <td>&nbsp;</td>

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ReleaseNotesGenerator.Features.ReleaseNotes;
 
 namespace ReleaseNotesGenerator.Features.SourceCodeRepositories
 {
@@ -12,5 +13,7 @@ namespace ReleaseNotesGenerator.Features.SourceCodeRepositories
         Task<Repository> Update(int id, Repository repository);
 
         Task<IEnumerable<Repository>> GetRepositories();
+
+        Task<IEnumerable<ReleaseNote>> GetRepositoryReleaseNotes(int repositoryId);
     }
 }

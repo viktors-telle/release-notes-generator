@@ -16,7 +16,8 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery]ReleaseNotesRequest releaseNotesRequest)
+        [Route("generate")]
+        public async Task<IActionResult> Generate([FromQuery]ReleaseNotesRequest releaseNotesRequest)
         {            
             if (!ModelState.IsValid)
             {
@@ -39,6 +40,13 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes
                 return Ok(releasesNotes);
             }
             
+            return Ok(releasesNotes);
+        }
+
+        [HttpGet]        
+        public async Task<IActionResult> GetAll()
+        {
+            var releasesNotes = await _releaseNotesComponent.GetAll();
             return Ok(releasesNotes);
         }
     }

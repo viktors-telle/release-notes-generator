@@ -79,5 +79,12 @@ namespace ReleaseNotesGenerator.Features.SourceCodeRepositories
 
             return new NoContentResult();
         }
+
+        [HttpGet("{repositoryId}/releaseNotes")]
+        public async Task<IActionResult> GetRepositoryReleaseNotes(int repositoryId)
+        {
+            var releaseNotes = await _repositoryComponent.GetRepositoryReleaseNotes(repositoryId);
+            return Ok(releaseNotes);
+        }
     }
 }

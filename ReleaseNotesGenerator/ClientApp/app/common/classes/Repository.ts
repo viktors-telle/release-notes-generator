@@ -15,6 +15,7 @@ import { EntityBase } from './EntityBase';
         projectTrackingToolId: number;
         projectTrackingTool: ProjectTrackingTool;
         releaseNotes: ReleaseNote[];
+        showReleaseNotes: boolean;
         }
 
     

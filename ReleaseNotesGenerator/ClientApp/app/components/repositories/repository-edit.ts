@@ -26,7 +26,8 @@ export class RepositoryEditComponent implements OnInit {
         projectId: 0,
         projectTrackingTool: <ProjectTrackingTool>{},
         projectTrackingToolId: 0,
-        releaseNotes: []
+        releaseNotes: [],
+        showReleaseNotes: false
     };
     repositoryForm: FormGroup;
     errorMessage: string;
