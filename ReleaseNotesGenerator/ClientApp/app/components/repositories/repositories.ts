@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Repository } from '../../common/classes/Repository';
 import { RepositoryService } from '../../services/repository-service';
+import { RepositoryType } from '../../common/classes/RepositoryType';
 
 @Component({
     selector: 'repositories',
@@ -10,7 +11,7 @@ import { RepositoryService } from '../../services/repository-service';
     providers: []
 })
 export class RepositoriesComponent implements OnInit {
-    repositories: Observable<Repository[]>;
+    repositories: Observable<Repository[]>;       
 
     constructor(private repositoryService: RepositoryService) {
 
@@ -20,7 +21,7 @@ export class RepositoriesComponent implements OnInit {
         this.repositories = this.repositoryService.getRepositories();        
     }
 
-    private addProject() {
-        
+    getRepositoryName(id: number): string {
+        return RepositoryType[id];
     }
 }

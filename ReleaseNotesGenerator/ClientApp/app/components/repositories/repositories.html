@@ -17,7 +17,7 @@
                 <td>
                     <a [routerLink]="['/repositories', repository.id]">{{repository.name}}</a>
                 </td>
-                <td>{{repository.repositoryType}}</td>
+                <td>{{getRepositoryName(repository.repositoryType)}}</td>
                 <td>
                     <a href="{{repository.url}}" target="_blank">{{repository.url}}</a>
                 </td>
