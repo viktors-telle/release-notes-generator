@@ -38,6 +38,11 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes
             }
         }
 
+        public async Task<List<ReleaseNote>> GetAll()
+        {
+            return await _context.ReleaseNotes.ToListAsync();
+        }
+
         private async Task<Repository> GetRepository(ReleaseNotesRequest request)
         {
             var project =

@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 using ReleaseNotesGenerator.Features.SourceCodeRepositories;
 
 namespace ReleaseNotesGenerator.Features.ReleaseNotes
@@ -11,6 +12,7 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes
 
         public int RepositoryId { get; set; }
 
+        [JsonIgnore]
         public Repository Repository { get; set; }
 
         public string RepositoryPath { get; set; }

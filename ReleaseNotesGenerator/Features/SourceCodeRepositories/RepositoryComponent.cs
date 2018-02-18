@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using ReleaseNotesGenerator.Dal;
+using ReleaseNotesGenerator.Features.ReleaseNotes;
 
 namespace ReleaseNotesGenerator.Features.SourceCodeRepositories
 {
@@ -45,6 +47,18 @@ namespace ReleaseNotesGenerator.Features.SourceCodeRepositories
 
             await _context.SaveChangesAsync();
             return existingRepository;
+        }
+
+        public async Task<IEnumerable<ReleaseNote>> GetRepositoryReleaseNotes(int repositoryId)
+        {
+            var repository = await _context
+                .Repositories
+                .Include(r => r.ReleaseNotes)
+                .FirstOrDefaultAsync(r => r.Id == repositoryId);
+            return repository
+                .ReleaseNotes
+                .OrderByDescending(r => r.Created)
+                .Take(5);
         }
     }
 }

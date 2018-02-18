@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const AotPlugin = require('@ngtools/webpack').AotPlugin;
+const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin;
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 
 module.exports = (env) => {
@@ -45,7 +45,7 @@ module.exports = (env) => {
         ] : [
             // Plugins that apply in production builds only
             new webpack.optimize.UglifyJsPlugin(),
-            new AotPlugin({
+            new AngularCompilerPlugin({
                 tsConfigPath: './tsconfig.json',
                 entryModule: path.join(__dirname, 'ClientApp/app/app.module.browser#AppModule'),
                 exclude: ['./**/*.server.ts']
@@ -53,32 +53,5 @@ module.exports = (env) => {
         ])
     });
 
-    // Configuration for server-side (prerendering) bundle suitable for running in Node
-    const serverBundleConfig = merge(sharedConfig, {
-        resolve: { mainFields: ['main'] },
-        entry: { 'main-server': './ClientApp/boot.server.ts' },
-        plugins: [
-            new webpack.DllReferencePlugin({
-                context: __dirname,
-                manifest: require('./ClientApp/dist/vendor-manifest.json'),
-                sourceType: 'commonjs2',
-                name: './vendor'
-            })
-        ].concat(isDevBuild ? [] : [
-            // Plugins that apply in production builds only
-            new AotPlugin({
-                tsConfigPath: './tsconfig.json',
-                entryModule: path.join(__dirname, 'ClientApp/app/app.module.server#AppModule'),
-                exclude: ['./**/*.browser.ts']
-            })
-        ]),
-        output: {
-            libraryTarget: 'commonjs',
-            path: path.join(__dirname, './ClientApp/dist')
-        },
-        target: 'node',
-        devtool: 'inline-source-map'
-    });
-
-    return [clientBundleConfig, serverBundleConfig];
+    return [clientBundleConfig];
 };

@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>Release Notes</h1>
+<div mat-dialog-content>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Branch name</th>
+                    <th>Created</th>
+                    <th>Release notes</th>                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let releaseNote of releaseNotes">
+                    <td>
+                       {{releaseNote.branchName}}
+                    </td>
+                    <td>
+                        {{releaseNote.created | date:'shortDate'}}
+                     </td>
+                     <td class="white-space-pre-line">
+                        {{releaseNote.notes}}
+                     </td>
+                </tr>
+                <tr *ngIf="releaseNotes.length === 0">
+                    <td>&nbsp;</td>
+                    <td colspan="2">No Records Found</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="mat-button" (click)="close()">Close</button>
+</div>

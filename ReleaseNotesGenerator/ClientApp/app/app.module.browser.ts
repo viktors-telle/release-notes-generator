@@ -6,6 +6,7 @@ import { AppComponent } from './components/app/app';
 import { ExceptionInterceptor } from './common/exception-interceptor';
 import { ProjectService } from './services/project-service';
 import { RepositoryService } from './services/repository-service';
+import { ReleaseNotesService } from './services/release-notes-service';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -17,6 +18,7 @@ import { RepositoryService } from './services/repository-service';
          { provide: 'BASE_URL', useFactory: getBaseUrl },
          ProjectService,
          RepositoryService,
+         ReleaseNotesService,
          { provide: HTTP_INTERCEPTORS, useClass: ExceptionInterceptor, multi: true }
     ]
 })

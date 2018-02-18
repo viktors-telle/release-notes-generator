@@ -14,7 +14,7 @@
         <div class="form-group">
             <label>Type</label>
             <select class="form-control" formControlName="repositoryType">
-                <option *ngFor="let key of keys" [value]="key" [label]="repositoryTypes[key]"></option>
+                <option *ngFor="let key of keys" [value]="key" [label]="capitalizeFirstLetter(repositoryTypes[key])"></option>
             </select>
             <div class="alert alert-danger" [hidden]="repositoryForm.controls.repositoryType.untouched || repositoryForm.controls.repositoryType.valid">Repository type is required</div>
         </div>
