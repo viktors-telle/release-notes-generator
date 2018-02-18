@@ -16,6 +16,8 @@ import { ProjectService } from '../../services/project-service';
 })
 export class ReleaseNotesGeneratorComponent implements OnInit {
     public branchName: string;
+    public fromDate: Date;
+    public toDate: Date;
     public releaseNotesAreGenerating: boolean = false;
     public repository: Repository;
 
@@ -33,16 +35,22 @@ export class ReleaseNotesGeneratorComponent implements OnInit {
     generate(): void {
         this.releaseNotesAreGenerating = true;
         this.projectService.getProject(this.repository.projectId).subscribe((project) => {
-            this.releaseNotesService.generateReleaseNotes(project.name, this.repository.name, this.branchName).subscribe(releaseNotes => {
-                this.releaseNotesAreGenerating = false;
-                this.dialogRef.close();
-            },
-            error => {
-                this.releaseNotesAreGenerating = false;
-            },
-            () => {
-                this.releaseNotesAreGenerating = false;
-            })
+            this.releaseNotesService.generateReleaseNotes(
+                project.name, 
+                this.repository.name, 
+                this.branchName, 
+                this.fromDate, 
+                this.toDate)
+                .subscribe(releaseNotes => {
+                    this.releaseNotesAreGenerating = false;
+                    this.dialogRef.close();
+                },
+                error => {
+                    this.releaseNotesAreGenerating = false;
+                },
+                () => {
+                    this.releaseNotesAreGenerating = false;
+                })
         });
     }
 

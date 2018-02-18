@@ -12,7 +12,9 @@ export class ReleaseNotesService {
         this.baseUrl = baseUrl;
     }   
 
-    generateReleaseNotes(projectName: string, repositoryName: string, branchName: string): Observable<string> {
-        return this.httpClient.get<string>(`${this.baseUrl}api/releasenotes/generate?projectName=${projectName}&repositoryName=${repositoryName}&branchName=${branchName}`);
+    generateReleaseNotes(projectName: string, repositoryName: string, branchName: string, from: Date, until: Date): Observable<string> {
+        return this
+            .httpClient
+            .get<string>(`${this.baseUrl}api/releasenotes/generate?projectName=${projectName}&repositoryName=${repositoryName}&branchName=${branchName}&from=${from.toISOString()}&until=${until.toISOString()}`);
     }
 }

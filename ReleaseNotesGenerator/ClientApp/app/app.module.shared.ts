@@ -12,7 +12,7 @@ import { RepositoriesComponent } from './components/repositories/repositories';
 import { RepositoryEditComponent } from './components/repositories/repository-edit';
 import { ReleaseNotesComponent } from './components/release-notes/release-notes';
 import { FilterPipe } from './common/pipes/filter-pipe';
-import { MatDialogModule, MatButtonModule, MatInputModule } from '@angular/material';
+import { MatDialogModule, MatButtonModule, MatInputModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReleaseNotesGeneratorComponent } from './components/release-notes/release-notes-generator';
 
@@ -31,7 +31,7 @@ import { ReleaseNotesGeneratorComponent } from './components/release-notes/relea
     ],
     entryComponents: [
         ReleaseNotesComponent,
-        ReleaseNotesGeneratorComponent,
+        ReleaseNotesGeneratorComponent
     ],
     imports: [
         CommonModule,
@@ -42,6 +42,8 @@ import { ReleaseNotesGeneratorComponent } from './components/release-notes/relea
         BrowserAnimationsModule,
         MatButtonModule,
         MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
