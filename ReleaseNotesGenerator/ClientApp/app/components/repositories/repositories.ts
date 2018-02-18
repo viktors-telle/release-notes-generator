@@ -1,3 +1,4 @@
+import {ReleaseNotesComponent} from '../release-notes/release-notes';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Repository } from '../../common/classes/Repository';
@@ -5,6 +6,7 @@ import { RepositoryService } from '../../services/repository-service';
 import { RepositoryType } from '../../common/classes/RepositoryType';
 import { ReleaseNotesService } from '../../services/release-notes-service';
 import { ReleaseNote } from '../../common/classes/ReleaseNote';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
     selector: 'repositories',
@@ -14,38 +16,29 @@ import { ReleaseNote } from '../../common/classes/ReleaseNote';
 })
 export class RepositoriesComponent implements OnInit {
     repositories: Observable<Repository[]>;
-    showReleaseNotes: boolean = false;
-
     repositoryReleaseNotes: RepositoryReleaseNotes[] = [];
 
-    constructor(private repositoryService: RepositoryService) {
+    constructor(private repositoryService: RepositoryService, public dialog: MatDialog) {
     }
 
     ngOnInit() {
         this.repositories = this.repositoryService.getRepositories();
     }
 
-    getRepositoryName(id: number): string {
-        return RepositoryType[id];
+    openDialog(repository: Repository): void {
+        this.repositoryService.getReleaseNotes(repository.id).subscribe((releaseNotes: ReleaseNote[]) => {
+            let dialogRef = this.dialog.open(ReleaseNotesComponent, {
+                width: '900px',
+                data: { repositoryReleaseNotes: releaseNotes }
+            });
+    
+            dialogRef.afterClosed().subscribe((result: any) => {                
+            });
+        });      
     }
 
-    getReleaseNotes(repository: Repository) {
-        if (repository.showReleaseNotes === true) {
-            repository.showReleaseNotes = false;
-            return;
-        }
-        let releaseNotes = this.repositoryService.getReleaseNotes(repository.id).subscribe((releaseNotes) => {
-            for (var i = this.repositoryReleaseNotes.length - 1; i >= 0; --i) {
-                if (this.repositoryReleaseNotes[i].repositoryId === repository.id) {
-                    this.repositoryReleaseNotes.splice(i, 1);                    
-                }
-            }
-            let repositoryReleaseNotes = new RepositoryReleaseNotes();
-            repositoryReleaseNotes.releaseNotes = releaseNotes,
-                repositoryReleaseNotes.repositoryId = repository.id;
-            this.repositoryReleaseNotes.push(repositoryReleaseNotes);
-            repository.showReleaseNotes = true;
-        });
+    getRepositoryName(id: number): string {
+        return RepositoryType[id];
     }
 }
 

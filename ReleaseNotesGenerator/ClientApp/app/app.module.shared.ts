@@ -12,6 +12,8 @@ import { RepositoriesComponent } from './components/repositories/repositories';
 import { RepositoryEditComponent } from './components/repositories/repository-edit';
 import { ReleaseNotesComponent } from './components/release-notes/release-notes';
 import { FilterPipe } from './common/pipes/filter-pipe';
+import { MatDialogModule, MatButtonModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -30,6 +32,9 @@ import { FilterPipe } from './common/pipes/filter-pipe';
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
+        MatDialogModule,
+        BrowserAnimationsModule,
+        MatButtonModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
