@@ -11,6 +11,7 @@
                 <th>URL</th>
                 <th>Owner</th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +25,10 @@
                 </td>
                 <td>{{repository.owner}}</td>
                 <td>
-                    <a tabindex="1" (click)="openDialog(repository)">Show release notes</a>
+                    <a tabindex="0" (click)="openReleaseNotes(repository)">Show release notes</a>
+                </td>
+                <td>
+                    <a tabindex="1" (click)="generateReleaseNotes(repository)">Generate release notes</a>
                 </td>
             </tr>
             <tr *ngIf="(repositories | async)?.length === 0">

@@ -5,24 +5,30 @@ import { ReleaseNotesService } from '../../services/release-notes-service';
 import { MatDialogRef } from '@angular/material';
 import { ReleaseNote } from '../../common/classes/ReleaseNote';
 import { DatePipe } from '@angular/common';
+import { Repository } from '../../common/classes/Repository';
 
 @Component({
-    selector: 'release-notes',
-    templateUrl: './release-notes.html',
-    styleUrls: ['./release-notes.css'],
+    selector: 'release-notes-generator',
+    templateUrl: './release-notes-generator.html',
+    styleUrls: ['./release-notes-generator.css'],
     providers: []
 })
-export class ReleaseNotesComponent implements OnInit {
-    public releaseNotes: ReleaseNote[] = [];
+export class ReleaseNotesGeneratorComponent implements OnInit {
+    private branchName: string;
+    public repository: Repository;    
 
     constructor(
         private releaseNotesService: ReleaseNotesService,
-        public dialogRef: MatDialogRef<ReleaseNotesComponent>,
+        public dialogRef: MatDialogRef<ReleaseNotesGeneratorComponent>,
         @Inject(MAT_DIALOG_DATA) public data:any) {
-            this.releaseNotes = data.repositoryReleaseNotes;
+
     }
 
     ngOnInit(): void {
+    }
+
+    generate(): void {
+        console.log("Release notes generated");
     }
 
     close(): void {

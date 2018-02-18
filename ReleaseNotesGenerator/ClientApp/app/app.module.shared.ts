@@ -12,8 +12,9 @@ import { RepositoriesComponent } from './components/repositories/repositories';
 import { RepositoryEditComponent } from './components/repositories/repository-edit';
 import { ReleaseNotesComponent } from './components/release-notes/release-notes';
 import { FilterPipe } from './common/pipes/filter-pipe';
-import { MatDialogModule, MatButtonModule } from '@angular/material';
+import { MatDialogModule, MatButtonModule, MatInputModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReleaseNotesGeneratorComponent } from './components/release-notes/release-notes-generator';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         RepositoriesComponent,
         RepositoryEditComponent,
         ReleaseNotesComponent,
+        ReleaseNotesGeneratorComponent,
         FilterPipe
+    ],
+    entryComponents: [
+        ReleaseNotesComponent,
+        ReleaseNotesGeneratorComponent,
     ],
     imports: [
         CommonModule,
@@ -35,6 +41,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatDialogModule,
         BrowserAnimationsModule,
         MatButtonModule,
+        MatInputModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
@@ -42,7 +49,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
             { path: 'projects/:id', component: ProjectEditComponent},
             { path: 'repositories', component: RepositoriesComponent },
             { path: 'repositories/:id', component: RepositoryEditComponent},
-            { path: 'release-notes', component: ReleaseNotesComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

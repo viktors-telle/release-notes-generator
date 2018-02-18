@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>ReleaseNotes</h1>
+<h1 mat-dialog-title>Release Notes</h1>
 <div mat-dialog-content>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -6,7 +6,7 @@
                 <tr>
                     <th>Branch name</th>
                     <th>Created</th>
-                    <th>Release notes</th>
+                    <th>Release notes</th>                    
                 </tr>
             </thead>
             <tbody>
@@ -15,10 +15,10 @@
                        {{releaseNote.branchName}}
                     </td>
                     <td>
-                        {{releaseNote.created}}
+                        {{releaseNote.created | date:'shortDate'}}
                      </td>
                      <td class="white-space-pre-line">
-                        {{releaseNote.notes.trim()}}
+                        {{releaseNote.notes}}
                      </td>
                 </tr>
                 <tr *ngIf="releaseNotes.length === 0">
@@ -30,5 +30,5 @@
     </div>
 </div>
 <div mat-dialog-actions>
-  <button mat-button class="mat-button" (click)="onNoClick()">Close</button>
+  <button mat-button class="mat-button" (click)="close()">Close</button>
 </div>
