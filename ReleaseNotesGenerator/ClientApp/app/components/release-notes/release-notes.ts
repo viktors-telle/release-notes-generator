@@ -16,7 +16,6 @@ export class ReleaseNotesComponent implements OnInit {
     public releaseNotes: ReleaseNote[] = [];
 
     constructor(
-        private releaseNotesService: ReleaseNotesService,
         public dialogRef: MatDialogRef<ReleaseNotesComponent>,
         @Inject(MAT_DIALOG_DATA) public data:any) {
             this.releaseNotes = data.repositoryReleaseNotes;

@@ -18,7 +18,7 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes
         [HttpGet]
         [Route("generate")]
         public async Task<IActionResult> Generate([FromQuery]ReleaseNotesRequest releaseNotesRequest)
-        {            
+        {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -39,11 +39,11 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes
                 Serilog.Log.Warning(ex, $"Related work items not found. Release notes request: {JsonConvert.SerializeObject(releaseNotesRequest)}");
                 return Ok(releasesNotes);
             }
-            
-            return Ok(releasesNotes);
+
+            return Ok(new { releasesNotes });
         }
 
-        [HttpGet]        
+        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var releasesNotes = await _releaseNotesComponent.GetAll();

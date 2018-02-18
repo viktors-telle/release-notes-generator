@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -54,7 +55,10 @@ namespace ReleaseNotesGenerator.Features.SourceCodeRepositories
                 .Repositories
                 .Include(r => r.ReleaseNotes)
                 .FirstOrDefaultAsync(r => r.Id == repositoryId);
-            return repository.ReleaseNotes;
+            return repository
+                .ReleaseNotes
+                .OrderByDescending(r => r.Created)
+                .Take(5);
         }
     }
 }

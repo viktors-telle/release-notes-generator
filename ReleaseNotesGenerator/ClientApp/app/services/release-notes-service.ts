@@ -11,4 +11,8 @@ export class ReleaseNotesService {
     constructor(private httpClient: HttpClient, @Inject('BASE_URL') baseUrl: string) {
         this.baseUrl = baseUrl;
     }   
+
+    generateReleaseNotes(projectName: string, repositoryName: string, branchName: string): Observable<string> {
+        return this.httpClient.get<string>(`${this.baseUrl}api/releasenotes/generate?projectName=${projectName}&repositoryName=${repositoryName}&branchName=${branchName}`);
+    }
 }

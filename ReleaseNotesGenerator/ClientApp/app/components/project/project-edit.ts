@@ -41,7 +41,7 @@ export class ProjectEditComponent implements OnInit {
     }
 
     getProject(id: string) {
-        this.projectService.getProject(id)
+        this.projectService.getProject(parseInt(id))
           .subscribe((project: Project) => {
             this.project = project;
             this.buildForm();            
