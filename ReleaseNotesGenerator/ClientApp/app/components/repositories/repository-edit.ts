@@ -8,6 +8,7 @@ import { RepositoryType } from '../../common/classes/RepositoryType';
 import { ProjectTrackingTool } from '../../common/classes/ProjectTrackingTool';
 import { RepositoryService } from '../../services/repository-service';
 import { ProjectService } from '../../services/project-service';
+import { Common } from '../../common/common';
 
 @Component({
     selector: 'repository-edit',
@@ -16,6 +17,7 @@ import { ProjectService } from '../../services/project-service';
     providers: []
 })
 export class RepositoryEditComponent implements OnInit {
+    capitalizeFirstLetter: Common = Common.capitalizeFirstLetter;
     repository: Repository = {
         name: "",
         repositoryType: RepositoryType.git,
@@ -39,7 +41,7 @@ export class RepositoryEditComponent implements OnInit {
         private projectService: ProjectService,
         private route: ActivatedRoute,
         private router: Router,
-        private formBuilder: FormBuilder) {
+        private formBuilder: FormBuilder) {            
         this.keys = Object.keys(this.repositoryTypes).filter(Number);
     }
 

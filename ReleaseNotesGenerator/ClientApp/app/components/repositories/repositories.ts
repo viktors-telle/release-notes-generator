@@ -8,6 +8,7 @@ import { ReleaseNotesService } from '../../services/release-notes-service';
 import { ReleaseNote } from '../../common/classes/ReleaseNote';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ReleaseNotesGeneratorComponent } from '../release-notes/release-notes-generator';
+import { Common } from '../../common/common';
 
 @Component({
     selector: 'repositories',
@@ -49,7 +50,7 @@ export class RepositoriesComponent implements OnInit {
     }
 
     getRepositoryName(id: number): string {
-        return RepositoryType[id];
+        return Common.capitalizeFirstLetter(RepositoryType[id]);
     }
 }
 
