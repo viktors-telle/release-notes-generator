@@ -28,7 +28,7 @@ export class RepositoriesComponent implements OnInit {
     openDialog(repository: Repository): void {
         this.repositoryService.getReleaseNotes(repository.id).subscribe((releaseNotes: ReleaseNote[]) => {
             let dialogRef = this.dialog.open(ReleaseNotesComponent, {
-                width: '900px',
+                width: '80vh',
                 data: { repositoryReleaseNotes: releaseNotes }
             });
     

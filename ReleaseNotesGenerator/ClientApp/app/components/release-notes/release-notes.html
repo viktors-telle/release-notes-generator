@@ -17,8 +17,8 @@
                     <td>
                         {{releaseNote.created}}
                      </td>
-                     <td>
-                        {{releaseNote.notes}}
+                     <td class="white-space-pre-line">
+                        {{releaseNote.notes.trim()}}
                      </td>
                 </tr>
                 <tr *ngIf="releaseNotes.length === 0">
