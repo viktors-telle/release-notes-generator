@@ -1,12 +1,12 @@
 <h1 mat-dialog-title>Generate Release Notes</h1>
 <div mat-dialog-content>
     <mat-form-field class="input-full-width">
-        <input matInput [matDatepicker]="fromDatePicker" placeholder="Choose a from date" [(ngModel)]="fromDate">
+        <input matInput (focus)="fromDatePicker.open()" (click)="fromDatePicker.open()" [matDatepicker]="fromDatePicker" placeholder="Choose a from date" [(ngModel)]="fromDate">
         <mat-datepicker-toggle matSuffix [for]="fromDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #fromDatePicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field class="input-full-width">
-        <input matInput [matDatepicker]="toDatePicker" placeholder="Choose a to date" [(ngModel)]="toDate">
+        <input matInput (focus)="toDatePicker.open()" (click)="toDatePicker.open()" [matDatepicker]="toDatePicker" placeholder="Choose a to date" [(ngModel)]="toDate">
         <mat-datepicker-toggle matSuffix [for]="toDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #toDatePicker></mat-datepicker>
     </mat-form-field>
