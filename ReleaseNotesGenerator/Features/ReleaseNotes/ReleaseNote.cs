@@ -19,8 +19,8 @@ namespace ReleaseNotesGenerator.Features.ReleaseNotes
 
         public string BranchName { get; set; }
 
-        public DateTime From { get; set; }
+        public DateTime? From { get; set; }
 
-        public DateTime Until { get; set; }
+        public DateTime? Until { get; set; }
     }
 }

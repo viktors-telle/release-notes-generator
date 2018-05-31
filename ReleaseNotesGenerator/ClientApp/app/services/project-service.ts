@@ -2,6 +2,7 @@ import { Injectable, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import { Project } from "../common/classes/project"
+import { share } from 'rxjs/operators';
 
 @Injectable()
 export class ProjectService {
@@ -12,18 +13,20 @@ export class ProjectService {
     }
 
     getProjects() : Observable<Project[]> {
-        return this.httpClient.get<Project[]>(`${this.baseUrl}/api/projects`);
+        return this.httpClient
+            .get<Project[]>(`${this.baseUrl}api/projects`)
+            .pipe(share());
     }
 
     getProject(id: number) : Observable<Project> {
-        return this.httpClient.get<Project>(`${this.baseUrl}/api/projects/${id}`);
+        return this.httpClient.get<Project>(`${this.baseUrl}api/projects/${id}`);
     }
 
     insertProject(project: Project) : Observable<Project> {
-        return this.httpClient.post<Project>(`${this.baseUrl}/api/projects`, project);
+        return this.httpClient.post<Project>(`${this.baseUrl}api/projects`, project);
     }
 
     updateProject(project: Project) : Observable<Project> {
-        return this.httpClient.put<Project>(`${this.baseUrl}/api/projects/${project.id}`, project);
+        return this.httpClient.put<Project>(`${this.baseUrl}api/projects/${project.id}`, project);
     }
 }

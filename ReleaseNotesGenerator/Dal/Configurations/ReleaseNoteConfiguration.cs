@@ -12,8 +12,8 @@ namespace ReleaseNotesGenerator.Dal.Configurations
 
             b.Property(p => p.Notes).IsRequired();
             b.Property(p => p.Created).IsRequired().HasColumnType("datetime2");
-            b.Property(p => p.From).IsRequired().HasColumnType("datetime2");
-            b.Property(p => p.Until).IsRequired().HasColumnType("datetime2");
+            b.Property(p => p.From).HasColumnType("datetime2");
+            b.Property(p => p.Until).HasColumnType("datetime2");
 
             b.Property(p => p.BranchName).HasMaxLength(256).IsRequired();
             b.Property(p => p.RepositoryPath).HasMaxLength(256);

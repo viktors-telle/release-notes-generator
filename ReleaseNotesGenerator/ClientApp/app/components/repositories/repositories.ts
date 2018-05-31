@@ -30,7 +30,7 @@ export class RepositoriesComponent implements OnInit {
     openReleaseNotes(repository: Repository): void {
         this.repositoryService.getReleaseNotes(repository.id).subscribe((releaseNotes: ReleaseNote[]) => {
             let dialogRef = this.dialog.open(ReleaseNotesComponent, {
-                width: '90vh',
+                width: '100vh',
                 data: { repositoryReleaseNotes: releaseNotes }
             });
     
@@ -41,7 +41,7 @@ export class RepositoriesComponent implements OnInit {
 
     generateReleaseNotes(repository: Repository): void {
         let dialogRef = this.dialog.open(ReleaseNotesGeneratorComponent, {
-            width: '90vh',
+            width: '40vh',
             data: { repository: repository }
         });
 
