@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net47</TargetFramework>
@@ -7,7 +7,7 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
@@ -15,6 +15,7 @@
     <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.HttpsPolicy" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />
@@ -42,129 +43,6 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\app\services\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="ClientApp\app\common\classes\Commit.ts">
-      <CustomToolNamespace>Domain\Commit\Commit.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\classes\CommitListExtensions.ts">
-      <CustomToolNamespace>Domain\Extensions\CommitListExtensions.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\classes\CommitQuery.ts">
-      <CustomToolNamespace>Domain\Commit\CommitQuery.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\classes\GitHubCommitResponse.ts">
-      <CustomToolNamespace>Domain\Commit\GitHubCommitResponse.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\classes\ReleaseNote.ts">
-      <CustomToolNamespace>Domain\ReleaseNote.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\classes\Repository.ts">
-      <CustomToolNamespace>Domain\Repository.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\classes\RepositoryItemPath.ts">
-      <CustomToolNamespace>Domain\RepositoryItemPath.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\classes\RepositoryType.ts">
-      <CustomToolNamespace>Enums\RepositoryType.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\Author.ts">
-      <CustomToolNamespace>Domain\Commit\Author.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\Author.tsx">
-      <CustomToolNamespace>Domain\Commit\Author.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\Branch.ts">
-      <CustomToolNamespace>Domain\Branch.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\Branch.tsx">
-      <CustomToolNamespace>Domain\Branch.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\Commit.ts">
-      <CustomToolNamespace>Domain\Commit\Commit.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\Commit.tsx">
-      <CustomToolNamespace>Domain\Commit\Commit.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\CommitQuery.ts">
-      <CustomToolNamespace>Domain\Commit\CommitQuery.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\CommitQuery.tsx">
-      <CustomToolNamespace>Domain\Commit\CommitQuery.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\CommitResponse.ts">
-      <CustomToolNamespace>Domain\Commit\CommitResponse.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\CommitResponse.tsx">
-      <CustomToolNamespace>Domain\Commit\CommitResponse.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\EntityBase.ts">
-      <CustomToolNamespace>Domain\EntityBase.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\EntityBase.tsx">
-      <CustomToolNamespace>Domain\EntityBase.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\Field.ts">
-      <CustomToolNamespace>Domain\WorkItem\Field.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\Field.tsx">
-      <CustomToolNamespace>Domain\WorkItem\Field.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\Project.ts">
-      <CustomToolNamespace>Domain\Project.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\Project.tsx">
-      <CustomToolNamespace>Domain\Project.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\ProjectTrackingTool.ts">
-      <CustomToolNamespace>Domain\ProjectTrackingTool.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\ProjectTrackingTool.tsx">
-      <CustomToolNamespace>Domain\ProjectTrackingTool.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\ProjectTrackingToolType.ts">
-      <CustomToolNamespace>Enums\ProjectTrackingToolType.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\ProjectTrackingToolType.tsx">
-      <CustomToolNamespace>Enums\ProjectTrackingToolType.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\ReleaseNote.ts">
-      <CustomToolNamespace>Domain\ReleaseNote.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\ReleaseNote.tsx">
-      <CustomToolNamespace>Domain\ReleaseNote.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\Repository.ts">
-      <CustomToolNamespace>Domain\Repository.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\Repository.tsx">
-      <CustomToolNamespace>Domain\Repository.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\RepositoryItemPath.ts">
-      <CustomToolNamespace>Domain\RepositoryItemPath.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\RepositoryItemPath.tsx">
-      <CustomToolNamespace>Domain\RepositoryItemPath.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\RepositoryType.ts">
-      <CustomToolNamespace>Enums\RepositoryType.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\RepositoryType.tsx">
-      <CustomToolNamespace>Enums\RepositoryType.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\WorkItem.ts">
-      <CustomToolNamespace>Domain\WorkItem\WorkItem.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\WorkItem.tsx">
-      <CustomToolNamespace>Domain\WorkItem\WorkItem.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\WorkItemResponse.ts">
-      <CustomToolNamespace>Domain\WorkItem\WorkItemResponse.cs</CustomToolNamespace>
-    </None>
-    <None Update="ClientApp\app\common\interfaces\WorkItemResponse.tsx">
-      <CustomToolNamespace>Domain\WorkItem\WorkItemResponse.cs</CustomToolNamespace>
-    </None>
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

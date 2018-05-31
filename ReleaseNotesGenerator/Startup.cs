@@ -121,6 +121,7 @@ namespace ReleaseNotesGenerator
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             //app.UseMiddleware<ApiAuthenticationMiddleware>();
             app.UseMiddleware<ErrorHandlingMiddleware>();
