@@ -1,11 +1,11 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ReleaseNotesGenerator.Tests
 {
-    [TestFixture]
+    [TestClass]
     public class GitHubRepositoryHandlerTests
     {
-        [Test]        
+        [TestMethod]        
         public void GetCommits()
         {
         }

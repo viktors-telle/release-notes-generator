@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ReleaseNotesGenerator.Mappings;
 
 namespace ReleaseNotesGenerator.Tests
 {
-    [TestFixture]
+    [TestClass]
     public class AutomapperTests
     {
-        [Test]
+        [TestMethod]
         public void AssertMappingConfigurationsAreValid()
         {                       
             Mapper.Initialize(m => m.AddProfile(new MappingProfile()));
