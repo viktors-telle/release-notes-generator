@@ -43,14 +43,7 @@ namespace ReleaseNotesGenerator
         {
             services.AddMvc();
 
-            //services.AddAuthorization(options =>
-            //{
-            //    options.AddPolicy("ModifyRepository",
-            //                      policy => policy.Requirements.Add(new RepositoryModificationRequirement()));
-            //});
-
-
-            services.AddDbContext<ReleaseNotesContext>(
+            services.AddDbContextPool<ReleaseNotesContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("ReleaseNotesGenerator")));
 
             services.AddSingleton<HttpClientFactory>();
@@ -64,8 +57,6 @@ namespace ReleaseNotesGenerator
             services.AddScoped<JiraHandler, JiraHandler>();
             services.AddScoped<GitRepositoryHandler, GitRepositoryHandler>();
             services.AddScoped<TfsRepositoryHandler, TfsRepositoryHandler>();
-            
-            //services.AddScoped<GitHubRepositoryHandler>(() => new GitHubRepositoryHandler(() => serviceProvider.GetService<HttpClientFactory>()));
 
             services.AddScoped(
                 provider => new GitHubRepositoryHandler(provider.GetService<HttpClientFactory>()));
@@ -119,11 +110,11 @@ namespace ReleaseNotesGenerator
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            //app.UseMiddleware<ApiAuthenticationMiddleware>();
             app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseStatusCodePages();
