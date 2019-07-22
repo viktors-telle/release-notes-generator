@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ReleaseNotesGenerator.Mappings;
 
@@ -10,8 +11,13 @@ namespace ReleaseNotesGenerator.Tests
         [TestMethod]
         public void AssertMappingConfigurationsAreValid()
         {                       
-            Mapper.Initialize(m => m.AddProfile(new MappingProfile()));
-            Mapper.AssertConfigurationIsValid();            
+            var mce = new MapperConfigurationExpression();
+
+            mce.AddProfile(new MappingProfile());
+
+            var mc = new MapperConfiguration(mce);
+
+            mc.AssertConfigurationIsValid();
         }
     }
 }

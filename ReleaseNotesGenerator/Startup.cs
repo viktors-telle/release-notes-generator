@@ -77,7 +77,7 @@ namespace ReleaseNotesGenerator
             services.Configure<SmtpOptions>(Configuration.GetSection("Smtp"));
 
             services.AddOptions();
-            services.AddAutoMapper();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Info
