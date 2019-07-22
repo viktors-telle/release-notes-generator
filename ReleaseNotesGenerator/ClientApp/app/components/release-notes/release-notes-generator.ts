@@ -1,10 +1,7 @@
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Inject } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { ReleaseNotesService } from '../../services/release-notes-service';
 import { MatDialogRef } from '@angular/material';
-import { ReleaseNote } from '../../common/classes/ReleaseNote';
-import { DatePipe } from '@angular/common';
 import { Repository } from '../../common/classes/Repository';
 import { ProjectService } from '../../services/project-service';
 
@@ -41,13 +38,13 @@ export class ReleaseNotesGeneratorComponent implements OnInit {
                 this.branchName, 
                 this.fromDate, 
                 this.toDate)
-                .subscribe(releaseNotes => {
-                    this.releaseNotesAreGenerating = false;
-                    this.dialogRef.close();
-                },
-                error => {
-                    this.releaseNotesAreGenerating = false;
-                },
+                .subscribe(() => {
+                        this.releaseNotesAreGenerating = false;
+                        this.dialogRef.close();
+                    },
+                () => {
+                        this.releaseNotesAreGenerating = false;
+                    },
                 () => {
                     this.releaseNotesAreGenerating = false;
                 })

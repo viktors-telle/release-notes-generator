@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from '../../common/classes/project';
-import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Repository } from '../../common/classes/Repository';
 import { ProjectService } from '../../services/project-service';
 
 @Component({
@@ -64,7 +62,7 @@ export class ProjectEditComponent implements OnInit {
         }
         value.id = this.project.id;
         if (value.id) {
-            this.projectService.updateProject(value).subscribe((project: Project) => {
+            this.projectService.updateProject(value).subscribe(() => {
                 this.router.navigate(["projects"]);
             },
             (err: any) => {
@@ -72,7 +70,7 @@ export class ProjectEditComponent implements OnInit {
                 this.errorMessage = "Error occured while updating project."
             });          
         } else {
-            this.projectService.insertProject(value).subscribe((project: Project) => {
+            this.projectService.insertProject(value).subscribe(() => {
                 this.router.navigate(["projects"]);
             },
             (err: any) => {

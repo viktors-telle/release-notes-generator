@@ -4,9 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { Repository } from '../../common/classes/Repository';
 import { RepositoryService } from '../../services/repository-service';
 import { RepositoryType } from '../../common/classes/RepositoryType';
-import { ReleaseNotesService } from '../../services/release-notes-service';
 import { ReleaseNote } from '../../common/classes/ReleaseNote';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { ReleaseNotesGeneratorComponent } from '../release-notes/release-notes-generator';
 import { Common } from '../../common/common';
 
@@ -34,7 +33,7 @@ export class RepositoriesComponent implements OnInit {
                 data: { repositoryReleaseNotes: releaseNotes }
             });
     
-            dialogRef.afterClosed().subscribe((result: any) => {                
+            dialogRef.afterClosed().subscribe(() => {
             });
         });      
     }
@@ -45,7 +44,7 @@ export class RepositoriesComponent implements OnInit {
             data: { repository: repository }
         });
 
-        dialogRef.afterClosed().subscribe((result: any) => {                
+        dialogRef.afterClosed().subscribe(() => {
         });
     }
 
