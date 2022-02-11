@@ -24,7 +24,7 @@
     "@angular/router": "5.2.5",
     "@ngtools/webpack": "1.10.0",
     "@types/webpack-env": "1.13.5",
-    "ajv": "6.1.1",
+    "ajv": "6.12.3",
     "angular2-template-loader": "0.6.2",
     "aspnet-prerendering": "^3.0.1",
     "aspnet-webpack": "2.0.3",
